@@ -16,6 +16,10 @@ import { POSView } from './components/pos/POSView';
 import { DashboardView } from './components/dashboard/DashboardView';
 import { ReportsView } from './components/reports/ReportsView';
 import { LobbyView } from './components/home/LobbyView';
+import { PetsView } from './components/pets/PetsView';
+import { OwnersView } from './components/owners/OwnersView';
+import { ClinicalRecordsListView } from './components/clinical/ClinicalRecordsListView';
+import { SettingsView } from './components/clinical/SettingsView';
 import { useRole } from './hooks/useRole';
 import { Menu, X } from 'lucide-react';
 
@@ -176,21 +180,81 @@ export default function App() {
               </motion.div>
             )}
 
+            {view === 'clinical-records' && (
+              <motion.div 
+                key="clinical-records"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                className="p-8 h-full"
+              >
+                {!canAccessClinical ? (
+                  <div className="flex flex-col items-center justify-center h-full text-center">
+                    <h2 className="text-2xl font-black text-slate-900">Acceso Restringido</h2>
+                    <p className="text-slate-500 mt-2">Solo médicos autorizados pueden ver expedientes clínicos.</p>
+                  </div>
+                ) : (
+                  <ClinicalRecordsListView onSelect={() => setView('clinical-record')} />
+                )}
+              </motion.div>
+            )}
+
             {view === 'clinical-record' && (
               <motion.div 
-                key="clinical"
+                key="clinical-record"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 className="p-8"
               >
+                <div className="mb-6">
+                  <button onClick={() => setView('clinical-records')} className="text-xs font-black text-indigo-600 uppercase tracking-widest hover:underline flex items-center gap-2">
+                    ← Volver al listado
+                  </button>
+                </div>
                 <ClinicalRecordForm 
                   petName="Bruno (Golden Retriever)"
                   petId="p1"
                   appointmentId="demo-app"
-                  onBack={() => setView('dashboard')}
-                  onSuccess={() => setView('dashboard')}
+                  onBack={() => setView('clinical-records')}
+                  onSuccess={() => setView('clinical-records')}
                 />
+              </motion.div>
+            )}
+
+            {view === 'pets' && (
+              <motion.div 
+                key="pets"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="p-8"
+              >
+                <PetsView />
+              </motion.div>
+            )}
+
+            {view === 'owners' && (
+              <motion.div 
+                key="owners"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="p-8"
+              >
+                <OwnersView />
+              </motion.div>
+            )}
+
+            {view === 'settings' && (
+              <motion.div 
+                key="settings"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="p-8"
+              >
+                <SettingsView />
               </motion.div>
             )}
 

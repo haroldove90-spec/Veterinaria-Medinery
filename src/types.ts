@@ -82,6 +82,9 @@ export interface Pet {
   breed: string;
   owner_id: string;
   birth_date?: string;
+  age?: number;
+  weight?: number;
+  photo_url?: string;
 }
 
 export interface Appointment {

@@ -82,38 +82,42 @@ export const POSView: React.FC = () => {
   };
 
   return (
-    <div className="flex gap-8 h-[calc(100vh-140px)] animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <div className="flex flex-col lg:flex-row gap-6 h-[calc(100vh-120px)] animate-in fade-in slide-in-from-bottom-4 duration-500 overflow-hidden md:p-0 p-2">
       {/* Product Selection */}
-      <div className="flex-1 flex flex-col gap-6">
-        <div className="relative group">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#A8B5A2] group-focus-within:text-[#4A5D4E]" size={20} />
+      <div className="flex-1 flex flex-col gap-6 overflow-hidden">
+        <div className="relative group shrink-0">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-indigo-600 transition-colors" size={20} />
           <input 
             type="text" 
             placeholder="Buscar producto o servicio (F2)..." 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white border border-[#F0EFEA] rounded-2xl py-4 pl-12 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#4A5D4E]/10 focus:border-[#4A5D4E] shadow-sm"
+            className="w-full bg-white border border-slate-100 rounded-2xl py-4 pl-12 pr-4 text-sm focus:outline-none focus:ring-4 focus:ring-indigo-500/5 focus:border-indigo-500 shadow-sm transition-all font-medium"
           />
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 overflow-y-auto pr-2 no-scrollbar">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 overflow-y-auto pr-2 no-scrollbar pb-10">
           {filteredProducts.map(product => (
             <motion.button
               whileHover={{ y: -4 }}
               key={product.id}
               onClick={() => addToCart(product)}
-              className="bg-white p-5 rounded-3xl border border-[#F0EFEA] flex flex-col items-start text-left hover:shadow-lg transition-all group"
+              className="bg-white p-4 md:p-6 rounded-[32px] border border-slate-100 flex flex-col items-start text-left hover:shadow-xl transition-all group relative overflow-hidden"
             >
-              <div className={`w-10 h-10 rounded-xl mb-4 flex items-center justify-center ${
-                product.category === ProductCategory.SERVICIO ? 'bg-[#EAF5F7] text-[#3A7E8F]' : 'bg-[#FBF5ED] text-[#9C763A]'
+              <div className={`absolute top-0 right-0 w-12 h-12 ${
+                product.category === ProductCategory.SERVICIO ? 'bg-indigo-50' : 'bg-amber-50'
+              } rounded-full -mr-6 -mt-6 opacity-40`} />
+              
+              <div className={`w-12 h-12 rounded-2xl mb-4 flex items-center justify-center relative ${
+                product.category === ProductCategory.SERVICIO ? 'bg-indigo-100 text-indigo-600' : 'bg-amber-100 text-amber-600'
               }`}>
-                {product.category === ProductCategory.SERVICIO ? <Stethoscope size={20} /> : <Package size={20} />}
+                {product.category === ProductCategory.SERVICIO ? <Stethoscope size={22} /> : <Package size={22} />}
               </div>
-              <span className="text-[10px] font-bold text-[#A8B5A2] uppercase tracking-widest">{product.category}</span>
-              <h4 className="font-bold text-[#2D3436] mt-1 group-hover:text-[#4A5D4E]">{product.name}</h4>
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{product.category}</span>
+              <h4 className="font-bold text-slate-900 mt-1 group-hover:text-indigo-600 transition-colors line-clamp-1">{product.name}</h4>
               <div className="flex justify-between items-end w-full mt-4">
-                <span className="text-lg font-bold text-[#4A5D4E]">${product.price}</span>
-                <span className={`text-[10px] font-bold ${product.stock < 5 ? 'text-rose-500' : 'text-[#7F8C8D]'}`}>
+                <span className="text-xl font-black text-slate-900">${product.price}</span>
+                <span className={`text-[10px] font-black uppercase tracking-widest ${product.stock < 5 ? 'text-rose-500' : 'text-slate-400'}`}>
                   Stock: {product.stock}
                 </span>
               </div>
@@ -123,7 +127,7 @@ export const POSView: React.FC = () => {
       </div>
 
       {/* Cart / Checkout */}
-      <aside className="w-96 bg-white rounded-[40px] shadow-2xl border border-[#F0EFEA] flex flex-col overflow-hidden">
+      <aside className="w-full lg:w-[400px] bg-white rounded-[40px] shadow-2xl border border-slate-100 flex flex-col overflow-hidden lg:h-full h-[50vh] shrink-0">
         <div className="p-6 border-b border-[#F0EFEA] flex items-center gap-3 bg-[#FDFCF8]">
           <div className="w-10 h-10 bg-[#4A5D4E] rounded-2xl flex items-center justify-center text-white">
             <ShoppingCart size={20} />
@@ -167,35 +171,35 @@ export const POSView: React.FC = () => {
           )}
         </div>
 
-        <div className="p-8 border-t border-[#F0EFEA] bg-[#FDFCF8] space-y-4">
+        <div className="p-8 border-t border-slate-50 bg-slate-50/50 space-y-4">
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
-              <span className="text-[#7F8C8D] font-medium">Subtotal</span>
-              <span className="text-[#2D3436] font-bold">${subtotal.toFixed(2)}</span>
+              <span className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Subtotal</span>
+              <span className="text-slate-900 font-black">${subtotal.toFixed(2)}</span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-[#7F8C8D] font-medium">IVA (16%)</span>
-              <span className="text-[#2D3436] font-bold">${tax.toFixed(2)}</span>
+              <span className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">IVA (16%)</span>
+              <span className="text-slate-900 font-black">${tax.toFixed(2)}</span>
             </div>
           </div>
-          <div className="flex justify-between items-end pt-4 border-t border-dashed border-[#C5D1C7]">
-            <span className="text-xs font-bold text-[#4A5D4E] uppercase tracking-[0.2em]">Total Pagar</span>
-            <span className="text-3xl font-black text-[#4A5D4E]">${total.toFixed(2)}</span>
+          <div className="flex justify-between items-end pt-4 border-t border-dashed border-slate-200">
+            <span className="text-[10px] font-black text-indigo-600 uppercase tracking-[0.2em]">Total Cobro</span>
+            <span className="text-4xl font-black text-slate-900 tracking-tighter">${total.toFixed(2)}</span>
           </div>
 
           <div className="grid grid-cols-2 gap-3 mt-6">
-            <button className="flex items-center justify-center gap-2 py-3 border border-[#F0EFEA] rounded-2xl text-xs font-bold text-[#4A5D4E] hover:bg-white transition-all uppercase tracking-widest">
-              <Banknote size={16} /> Efectivo
+            <button className="flex flex-col items-center justify-center gap-2 py-4 bg-white border border-slate-100 rounded-3xl text-[10px] font-black text-slate-600 hover:border-indigo-600 hover:text-indigo-600 transition-all uppercase tracking-widest shadow-sm">
+              <Banknote size={20} /> Efectivo
             </button>
-            <button className="flex items-center justify-center gap-2 py-3 border border-[#F0EFEA] rounded-2xl text-xs font-bold text-[#4A5D4E] hover:bg-white transition-all uppercase tracking-widest">
-              <CreditCard size={16} /> Tarjeta
+            <button className="flex flex-col items-center justify-center gap-2 py-4 bg-white border border-slate-100 rounded-3xl text-[10px] font-black text-slate-600 hover:border-indigo-600 hover:text-indigo-600 transition-all uppercase tracking-widest shadow-sm">
+              <CreditCard size={20} /> Tarjeta
             </button>
           </div>
 
           <button 
             onClick={handleCheckout}
             disabled={cart.length === 0 || isProcessing}
-            className="w-full bg-[#4A5D4E] text-white py-4 rounded-3xl font-bold uppercase tracking-[0.2em] text-xs shadow-xl shadow-[#4A5D4E]/20 hover:bg-[#5D6F61] transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2 flex items-center justify-center gap-3"
+            className="w-full bg-slate-900 text-white py-5 rounded-[24px] font-black uppercase tracking-[0.2em] text-[10px] shadow-2xl hover:bg-black transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2 flex items-center justify-center gap-3"
           >
             {isProcessing ? (
               <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
