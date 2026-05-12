@@ -16,8 +16,6 @@ import { POSView } from './components/pos/POSView';
 import { DashboardView } from './components/dashboard/DashboardView';
 import { ReportsView } from './components/reports/ReportsView';
 import { LobbyView } from './components/home/LobbyView';
-import { LandingPage } from './components/landing/LandingPage';
-import { ClientPortalView } from './components/client/ClientPortalView';
 import { PetsView } from './components/pets/PetsView';
 import { OwnersView } from './components/owners/OwnersView';
 import { ClinicalRecordsListView } from './components/clinical/ClinicalRecordsListView';
@@ -65,11 +63,11 @@ const mockAppointments: Appointment[] = [
   },
 ];
 
-type AppView = 'landing' | 'lobby' | 'dashboard' | 'calendar' | 'clinical-record' | 'pets' | 'owners' | 'pos' | 'reports' | 'settings' | 'client-dashboard';
+type AppView = 'lobby' | 'dashboard' | 'calendar' | 'clinical-record' | 'pets' | 'owners' | 'pos' | 'reports' | 'settings';
 
 export default function App() {
   const [currentRole, setCurrentRole] = useState<UserRole>(UserRole.ADMIN);
-  const [view, setView] = useState<AppView>('landing');
+  const [view, setView] = useState<AppView>('lobby');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const userName = "Dr. Alejandro Pérez";
@@ -84,18 +82,10 @@ export default function App() {
   const handleAddAppointment = () => setIsModalOpen(true);
   const handleSearch = (q: string) => console.log('Buscando:', q);
 
-  if (view === 'landing') {
-    return <LandingPage onEnterPortal={() => setView('lobby')} />;
-  }
-
   if (view === 'lobby') {
     return <LobbyView onSelectRole={(role) => {
       setCurrentRole(role);
-      if (role === UserRole.CLIENT) {
-        setView('client-dashboard');
-      } else {
-        setView('dashboard');
-      }
+      setView('dashboard');
     }} />;
   }
 
@@ -147,7 +137,29 @@ export default function App() {
                 exit={{ opacity: 0, y: -10 }}
                 className="p-8 space-y-10"
               >
-                {/* Dashboard logic */}
+                {/* Role Switcher Floating (Demo Purpose) */}
+                <div className="fixed bottom-8 right-8 z-[100] bg-white/80 backdrop-blur-md p-2 rounded-2xl border border-slate-200 shadow-2xl flex flex-col gap-2 scale-90 origin-bottom-right hover:scale-100 transition-transform">
+                  <div className="px-3 py-1 flex items-center justify-between border-b border-slate-100 mb-1">
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Demo Sim</span>
+                    <div className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
+                  </div>
+                  <div className="bg-slate-100 p-1 rounded-xl flex gap-1">
+                    {(Object.keys(UserRole) as Array<keyof typeof UserRole>).map((role) => (
+                      <button
+                        key={role}
+                        onClick={() => setCurrentRole(UserRole[role])}
+                        className={`px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-wider transition-all ${
+                          currentRole === UserRole[role] 
+                            ? 'bg-indigo-600 text-white shadow-md' 
+                            : 'text-slate-500 hover:bg-white hover:text-indigo-600'
+                        }`}
+                      >
+                        {role}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 <DashboardView />
               </motion.div>
             )}
@@ -281,48 +293,8 @@ export default function App() {
                 )}
               </motion.div>
             )}
-
-            {view === 'client-dashboard' && (
-              <motion.div
-                key="client-dashboard"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="h-full flex flex-col"
-              >
-                <ClientPortalView />
-              </motion.div>
-            )}
           </AnimatePresence>
         </main>
-      </div>
-
-      {/* Global Role Switcher Floating (Demo Purpose) */}
-      <div className="fixed bottom-8 right-8 z-[100] bg-white/80 backdrop-blur-md p-2 rounded-2xl border border-slate-200 shadow-2xl flex flex-col gap-2 scale-90 origin-bottom-right hover:scale-100 transition-transform">
-        <div className="px-3 py-1 flex items-center justify-between border-b border-slate-100 mb-1">
-          <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Demo Sim</span>
-          <div className="w-2 h-2 rounded-full bg-medinery-blue animate-pulse" />
-        </div>
-        <div className="bg-slate-100 p-1 rounded-xl flex gap-1">
-          {(Object.keys(UserRole) as Array<keyof typeof UserRole>).map((role) => (
-            <button
-              key={role}
-              onClick={() => {
-                const newRole = UserRole[role];
-                setCurrentRole(newRole);
-                if (newRole === UserRole.CLIENT) setView('client-dashboard');
-                else if (view === 'client-dashboard') setView('dashboard');
-              }}
-              className={`px-3 py-1.5 rounded-lg text-[9px] font-bold uppercase tracking-wider transition-all ${
-                currentRole === UserRole[role] 
-                  ? 'bg-medinery-blue text-white shadow-md' 
-                  : 'text-slate-500 hover:bg-white hover:text-medinery-blue'
-              }`}
-            >
-              {role}
-            </button>
-          ))}
-        </div>
       </div>
 
       <AppointmentModal 

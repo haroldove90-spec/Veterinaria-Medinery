@@ -44,7 +44,7 @@ export const TopBar: React.FC<TopBarProps> = ({ currentRole, onSearch, onOpenMen
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Buscar paciente, cliente o cita..."
+            placeholder="Search patient, client or appointment..."
             className="w-full bg-slate-50/50 border border-slate-100 rounded-2xl py-2.5 pl-12 pr-4 text-sm focus:outline-none focus:ring-4 focus:ring-medinery-teal/5 focus:border-medinery-teal transition-all font-medium"
           />
         </form>

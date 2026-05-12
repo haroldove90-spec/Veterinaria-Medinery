@@ -31,18 +31,11 @@ interface SidebarItem {
 
 const menuItems: SidebarItem[] = [
   { 
-    title: 'Panel Control', 
+    title: 'Dashboard', 
     icon: LayoutDashboard, 
     roles: [UserRole.ADMIN, UserRole.VETERINARIAN, UserRole.RECEPTION],
     path: '/',
     view: 'dashboard'
-  },
-  { 
-    title: 'Mi Portal', 
-    icon: LayoutDashboard, 
-    roles: [UserRole.CLIENT],
-    path: '/',
-    view: 'client-dashboard'
   },
   { 
     title: 'Calendario', 
@@ -87,7 +80,7 @@ const menuItems: SidebarItem[] = [
     view: 'reports'
   },
   { 
-    title: 'Configuración', 
+    title: 'Configuracion', 
     icon: Settings, 
     roles: [UserRole.ADMIN],
     path: '/settings',
@@ -146,7 +139,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ userRole, userName, onNavigate
           <Settings size={18} />
         </button>
         <button 
-          onClick={() => onNavigate('landing')}
+          onClick={() => onNavigate('lobby')}
           className="w-10 h-10 rounded-full bg-rose-500/20 text-rose-300 flex items-center justify-center hover:bg-rose-500/40 transition-all mb-4"
         >
           <LogOut size={18} className="rotate-180" />

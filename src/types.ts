@@ -7,7 +7,6 @@ export enum UserRole {
   ADMIN = 'ADMIN',
   VETERINARIAN = 'VETERINARIAN',
   RECEPTION = 'RECEPTION',
-  CLIENT = 'CLIENT',
 }
 
 export enum AppointmentStatus {
