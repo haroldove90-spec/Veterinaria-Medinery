@@ -32,44 +32,44 @@ import { AppointmentStatus } from '../../types';
 
 // --- Improved Data Structure for Visual Representation ---
 const performanceData = [
-  { name: 'Jan', value: 300 },
+  { name: 'Ene', value: 300 },
   { name: 'Feb', value: 200 },
   { name: 'Mar', value: 250 },
-  { name: 'Apr', value: 220 },
+  { name: 'Abr', value: 220 },
   { name: 'May', value: 280 },
   { name: 'Jun', value: 400 },
   { name: 'Jul', value: 300 },
-  { name: 'Aug', value: 320 },
+  { name: 'Ago', value: 320 },
   { name: 'Sep', value: 250 },
   { name: 'Oct', value: 280 },
   { name: 'Nov', value: 220 },
-  { name: 'Dec', value: 350 },
+  { name: 'Dic', value: 350 },
 ];
 
 const genderData = [
-  { name: 'Male', value: 4000, color: '#0A58CA' },
-  { name: 'Female', value: 1000, color: '#E2E8F0' },
+  { name: 'Macho', value: 4000, color: '#0A58CA' },
+  { name: 'Hembra', value: 1000, color: '#E2E8F0' },
 ];
 
 const appointments = [
-  { id: 1, name: 'Linda Brown', time: '08:00 AM', status: 'confirmed', type: 'First visit' },
-  { id: 2, name: 'Nelly Dean', time: '09:00 AM', status: 'confirmed', type: 'First visit' },
-  { id: 3, name: 'John Doe', time: '10:00 AM', status: 'confirmed', type: 'First visit' },
-  { id: 4, name: 'James Vane', time: '10:45 AM', status: 'confirmed', type: 'First visit' },
-  { id: 5, name: 'Mary Smith', time: '11:00 AM', status: 'cancelled', type: 'Consultation' },
+  { id: 1, name: 'Linda Brown', time: '08:00 AM', status: 'confirmed', type: 'Primera visita' },
+  { id: 2, name: 'Nelly Dean', time: '09:00 AM', status: 'confirmed', type: 'Primera visita' },
+  { id: 3, name: 'John Doe', time: '10:00 AM', status: 'confirmed', type: 'Primera visita' },
+  { id: 4, name: 'James Vane', time: '10:45 AM', status: 'confirmed', type: 'Primera visita' },
+  { id: 5, name: 'Mary Smith', time: '11:00 AM', status: 'cancelled', type: 'Consulta' },
 ];
 
 const patientFiles = [
-  { name: 'Linda Pres***.pdf', id: '1' },
-  { name: 'John Checkup.pdf', id: '2' },
-  { name: 'James Pres***.pdf', id: '3' },
-  { name: 'Nelly X-ray result.pdf', id: '4' },
+  { name: 'Linda Receta.pdf', id: '1' },
+  { name: 'John Chequeo.pdf', id: '2' },
+  { name: 'James Receta.pdf', id: '3' },
+  { name: 'Nelly Rayos-X.pdf', id: '4' },
 ];
 
 const doctorReviews = [
-  { id: 1, name: 'Linda Brown', text: 'Dr. James is a great doctor!' },
-  { id: 2, name: 'John Doe', text: 'Dr. James is my favorite' },
-  { id: 3, name: 'James Vane', text: 'Thanks Doc!' },
+  { id: 1, name: 'Linda Brown', text: '¡El Dr. James es un excelente médico!' },
+  { id: 2, name: 'John Doe', text: 'El Dr. James es mi favorito' },
+  { id: 3, name: 'James Vane', text: '¡Gracias Doc!' },
 ];
 
 export const DashboardView: React.FC = () => {
@@ -78,10 +78,10 @@ export const DashboardView: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-medinery-dark">Hello James!</h1>
+          <h1 className="text-3xl font-bold text-medinery-dark">¡Hola James!</h1>
           <p className="text-slate-500 font-medium text-sm mt-1">
-            Welcome James to Our Platform.<br/>
-            Let's help patients to live a healthier and happier life
+            Bienvenido James a nuestra plataforma.<br/>
+            Ayudemos a los pacientes a vivir una vida más sana y feliz
           </p>
         </div>
         <div className="flex items-center gap-4">
@@ -100,9 +100,9 @@ export const DashboardView: React.FC = () => {
           {/* Income Chart Card */}
           <div className="bg-white rounded-[32px] p-8 shadow-sm border border-slate-100 flex flex-col h-[400px]">
             <div className="flex justify-between items-center mb-10">
-              <h2 className="text-lg font-bold text-medinery-dark">Doctor Salary</h2>
+              <h2 className="text-lg font-bold text-medinery-dark">Ingresos Médicos</h2>
               <button className="flex items-center gap-2 px-4 py-1.5 bg-medinery-teal text-white rounded-lg text-xs font-bold">
-                Yearly <ChevronDown size={14} />
+                Anual <ChevronDown size={14} />
               </button>
             </div>
             <div className="flex-1">
@@ -140,11 +140,11 @@ export const DashboardView: React.FC = () => {
             </div>
             <div className="flex justify-around mt-6 border-t border-slate-50 pt-6">
               <div className="text-center">
-                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">This Week</p>
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Esta Semana</p>
                 <p className="text-2xl font-black text-medinery-blue">$259</p>
               </div>
               <div className="text-center">
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">This Month</p>
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Este Mes</p>
                 <p className="text-2xl font-black text-medinery-blue">$873</p>
               </div>
             </div>
@@ -153,22 +153,22 @@ export const DashboardView: React.FC = () => {
           {/* Duty Hour Calendar / Widget */}
           <div className="bg-white rounded-[32px] p-8 shadow-sm border border-slate-100 h-fit">
             <div className="flex justify-between items-center mb-8">
-              <h2 className="text-lg font-bold text-medinery-dark">Duty Hour</h2>
+              <h2 className="text-lg font-bold text-medinery-dark">Horario de Turno</h2>
               <button className="flex items-center gap-2 px-4 py-1.5 bg-medinery-teal text-white rounded-lg text-xs font-bold">
-                Weekly <ChevronDown size={14} />
+                Semanal <ChevronDown size={14} />
               </button>
             </div>
             <div className="flex justify-between items-center gap-1">
-              {['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'].map((day, i) => (
-                <div key={day} className={`flex flex-col items-center p-3 rounded-2xl w-full max-w-[60px] transition-all cursor-pointer ${day === 'Mon' ? 'bg-medinery-blue text-white shadow-xl shadow-medinery-blue/30 scale-110' : 'text-slate-400 hover:bg-slate-50'}`}>
+              {['Sáb', 'Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie'].map((day, i) => (
+                <div key={day} className={`flex flex-col items-center p-3 rounded-2xl w-full max-w-[60px] transition-all cursor-pointer ${day === 'Lun' ? 'bg-medinery-blue text-white shadow-xl shadow-medinery-blue/30 scale-110' : 'text-slate-400 hover:bg-slate-50'}`}>
                   <span className="text-[10px] font-bold mb-2">{day}</span>
                   <span className="text-lg font-black">{9 + i - (i > 3 ? 5 : 0)}</span>
                 </div>
               ))}
             </div>
             <button className="w-full mt-8 py-3 bg-medinery-blue rounded-full text-white font-bold text-sm shadow-xl shadow-medinery-blue/20 flex items-center justify-center gap-2">
-              <span className="text-xl font-black">49 hours</span>
-              <span className="opacity-60 text-xs font-medium italic">Avg Duty Hour</span>
+              <span className="text-xl font-black">49 horas</span>
+              <span className="opacity-60 text-xs font-medium italic">Promedio de Horas</span>
             </button>
           </div>
         </div>
@@ -178,18 +178,18 @@ export const DashboardView: React.FC = () => {
           {/* Gender Distribution Chart */}
           <div className="bg-white rounded-[32px] p-8 shadow-sm border border-slate-100">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-lg font-bold text-medinery-dark">Patient Gender</h2>
-              <button className="text-medinery-teal text-[10px] font-black uppercase tracking-widest hover:underline">View All</button>
+              <h2 className="text-lg font-bold text-medinery-dark">Género de Pacientes</h2>
+              <button className="text-medinery-teal text-[10px] font-black uppercase tracking-widest hover:underline">Ver Todo</button>
             </div>
             <div className="flex items-center gap-8">
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 bg-medinery-blue rounded-full" />
-                  <span className="text-xs font-bold text-slate-500">4000 Male</span>
+                  <span className="text-xs font-bold text-slate-500">4000 Machos</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 bg-slate-200 rounded-full" />
-                  <span className="text-xs font-bold text-slate-500">1000 Female</span>
+                  <span className="text-xs font-bold text-slate-500">1000 Hembras</span>
                 </div>
               </div>
               <div className="relative w-32 h-32 mx-auto">
@@ -217,7 +217,7 @@ export const DashboardView: React.FC = () => {
 
           {/* Upcoming Appointment List */}
           <div className="bg-white rounded-[32px] p-8 shadow-sm border border-slate-100 flex flex-col flex-1 min-h-[460px]">
-            <h2 className="text-lg font-bold text-medinery-dark mb-8">Upcoming Appointment</h2>
+            <h2 className="text-lg font-bold text-medinery-dark mb-8">Próximas Citas</h2>
             <div className="space-y-6 flex-1">
               {appointments.map((appt) => (
                 <div key={appt.id} className="flex items-center justify-between group">
@@ -246,10 +246,10 @@ export const DashboardView: React.FC = () => {
         <div className="space-y-8">
           {/* Profile Card */}
           <div className="bg-white rounded-[32px] p-8 shadow-sm border border-slate-100 text-center relative overflow-hidden group">
-            <h2 className="text-xs font-black uppercase text-slate-400 tracking-widest text-left mb-8">Profile</h2>
+            <h2 className="text-xs font-black uppercase text-slate-400 tracking-widest text-left mb-8">Perfil</h2>
             <div className="w-24 h-24 bg-slate-200 rounded-full mx-auto mb-4 border-4 border-white shadow-lg shadow-slate-200/50" />
             <h3 className="text-lg font-black text-slate-900 tracking-tight">Dr James Smith</h3>
-            <p className="text-xs font-bold text-medinery-blue italic ">Cardiologists doctors</p>
+            <p className="text-xs font-bold text-medinery-blue italic ">Médico Cardiólogo</p>
             
             <div className="flex justify-around items-center mt-8 pt-8 border-t border-slate-50 mb-8">
               <div className="flex flex-col items-center">
@@ -258,7 +258,7 @@ export const DashboardView: React.FC = () => {
               </div>
               <div className="flex flex-col items-center">
                 <Users className="text-medinery-blue mb-1" size={14} />
-                <span className="text-sm font-black text-slate-900">115 Patient</span>
+                <span className="text-sm font-black text-slate-900">115 Pacientes</span>
               </div>
             </div>
 
@@ -278,8 +278,8 @@ export const DashboardView: React.FC = () => {
           {/* Patient Files */}
           <div className="bg-white rounded-[32px] p-8 shadow-sm border border-slate-100">
             <div className="flex justify-between items-center mb-8">
-              <h2 className="text-lg font-bold text-medinery-dark">Patient File</h2>
-              <button className="text-medinery-teal text-[10px] font-black uppercase tracking-widest bg-medinery-teal/10 px-3 py-1 rounded-lg">View As</button>
+              <h2 className="text-lg font-bold text-medinery-dark">Archivos del Paciente</h2>
+              <button className="text-medinery-teal text-[10px] font-black uppercase tracking-widest bg-medinery-teal/10 px-3 py-1 rounded-lg">Ver como</button>
             </div>
             <div className="space-y-4">
               {patientFiles.map(file => (

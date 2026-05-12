@@ -35,15 +35,15 @@ export const LobbyView: React.FC<LobbyViewProps> = ({ onSelectRole }) => {
           Veterinaria <span className="text-medinery-blue">Medinery</span>
         </h1>
         <p className="text-slate-500 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed">
-          The best platform for managing your veterinary clinic and providing the best care for patients.
+          La mejor plataforma para gestionar tu clínica veterinaria y brindar el mejor cuidado a tus pacientes.
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full max-w-6xl z-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-7xl z-10">
         {/* Admin Card */}
         <RoleCard 
           title="ADMINISTRACIÓN"
-          description="Control financiero, ingresos, inventarios y reportes estratégicos para gerencia."
+          description="Control financiero, ingresos, inventarios y reportes estratégicos."
           icon={Shield}
           color="indigo"
           onClick={() => onSelectRole(UserRole.ADMIN)}
@@ -52,8 +52,8 @@ export const LobbyView: React.FC<LobbyViewProps> = ({ onSelectRole }) => {
 
         {/* Vet Card */}
         <RoleCard 
-          title="MÉDICO VETERINARIO"
-          description="Expedientes clínicos, consultas, hospitalización y diagnósticos especializados."
+          title="MÉDICO VET"
+          description="Expedientes clínicos, consultas y diagnósticos especializados."
           icon={Stethoscope}
           color="emerald"
           onClick={() => onSelectRole(UserRole.VETERINARIAN)}
@@ -62,12 +62,22 @@ export const LobbyView: React.FC<LobbyViewProps> = ({ onSelectRole }) => {
 
         {/* Reception Card */}
         <RoleCard 
-          title="RECEPCIÓN Y CITAS"
-          description="Agenda inteligente, registro de clientes, caja rápida y seguimiento de pacientes."
+          title="RECEPCIÓN"
+          description="Agenda inteligente, registro de clientes y caja rápida."
           icon={Calendar}
           color="sky"
           onClick={() => onSelectRole(UserRole.RECEPTION)}
           delay={0.3}
+        />
+
+        {/* Client Card */}
+        <RoleCard 
+          title="PORTAL CLIENTE"
+          description="Seguimiento de mascotas, citas agendadas e historial privado."
+          icon={Dog}
+          color="indigo"
+          onClick={() => onSelectRole(UserRole.CLIENT)}
+          delay={0.4}
         />
       </div>
 
