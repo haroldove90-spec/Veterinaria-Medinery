@@ -18,11 +18,28 @@ const mockOwners: Owner[] = [
 
 export const OwnersView: React.FC = () => {
   const [search, setSearch] = useState('');
+  const [isAdding, setIsAdding] = useState(false);
+  const [owners, setOwners] = useState<Owner[]>(mockOwners);
   
-  const filtered = mockOwners.filter(o => 
+  const filtered = owners.filter(o => 
     o.full_name.toLowerCase().includes(search.toLowerCase()) || 
     o.email.toLowerCase().includes(search.toLowerCase())
   );
+
+  const handleAddClient = () => {
+    setIsAdding(true);
+    setTimeout(() => {
+      const newOwner = {
+        id: Math.random().toString(36).substr(2, 9),
+        full_name: 'Nuevo Cliente Simulado',
+        email: 'cliente@simulacion.com',
+        phone: '555-0000',
+        address: 'Dirección de Prueba'
+      };
+      setOwners([newOwner, ...owners]);
+      setIsAdding(false);
+    }, 1500);
+  };
 
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -31,8 +48,17 @@ export const OwnersView: React.FC = () => {
           <h1 className="text-2xl font-black text-slate-900 tracking-tight">Directorio de Clientes</h1>
           <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Gestión de Propietarios</p>
         </div>
-        <button className="flex items-center gap-2 px-6 py-3 bg-medinery-teal text-white rounded-2xl text-sm font-bold shadow-lg shadow-medinery-teal/10 hover:bg-medinery-teal/90 transition-all">
-          <Plus size={18} /> Nuevo Cliente
+        <button 
+          onClick={handleAddClient}
+          disabled={isAdding}
+          className="flex items-center gap-2 px-6 py-3 bg-medinery-teal text-white rounded-2xl text-sm font-bold shadow-lg shadow-medinery-teal/10 hover:bg-medinery-teal/90 transition-all disabled:opacity-50"
+        >
+          {isAdding ? (
+            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+          ) : (
+            <Plus size={18} />
+          )}
+          {isAdding ? 'Agregando...' : 'Nuevo Cliente'}
         </button>
       </div>
 

@@ -140,10 +140,10 @@ export default function App() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="p-8 space-y-10"
+                className="p-4 md:p-8 space-y-6 md:space-y-10"
               >
                 {/* Role Switcher Floating (Demo Purpose) */}
-                <div className="fixed bottom-8 right-8 z-[100] bg-white/80 backdrop-blur-md p-2 rounded-2xl border border-slate-200 shadow-2xl flex flex-col gap-2 scale-90 origin-bottom-right hover:scale-100 transition-transform">
+                <div className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[100] bg-white/80 backdrop-blur-md p-2 rounded-2xl border border-slate-200 shadow-2xl flex flex-col gap-2 scale-75 md:scale-90 origin-bottom-right hover:scale-100 transition-transform hidden sm:flex">
                   <div className="px-3 py-1 flex items-center justify-between border-b border-slate-100 mb-1">
                     <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Demo Sim</span>
                     <div className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
@@ -175,7 +175,7 @@ export default function App() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
-                className="p-8 h-full"
+                className="p-4 md:p-8 h-full"
               >
                 <CalendarView 
                   appointments={mockAppointments} 
@@ -191,7 +191,7 @@ export default function App() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
-                className="p-8 h-full"
+                className="p-4 md:p-8 h-full"
               >
                 {!canAccessClinical ? (
                   <div className="flex flex-col items-center justify-center h-full text-center">
@@ -210,10 +210,10 @@ export default function App() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                className="p-8"
+                className="p-4 md:p-8"
               >
                 <div className="mb-6">
-                  <button onClick={() => setView('clinical-records')} className="text-xs font-black text-indigo-600 uppercase tracking-widest hover:underline flex items-center gap-2">
+                  <button onClick={() => setView('clinical-records')} className="text-xs font-black text-medinery-blue uppercase tracking-widest hover:underline flex items-center gap-2">
                     ← Volver al listado
                   </button>
                 </div>
@@ -233,7 +233,7 @@ export default function App() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="p-8"
+                className="p-4 md:p-8"
               >
                 <PetsView />
               </motion.div>
@@ -245,7 +245,7 @@ export default function App() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="p-8"
+                className="p-4 md:p-8"
               >
                 <OwnersView />
               </motion.div>
@@ -257,7 +257,7 @@ export default function App() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="p-8"
+                className="p-4 md:p-8"
               >
                 <SettingsView />
               </motion.div>
@@ -269,7 +269,7 @@ export default function App() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                className="p-8 h-full"
+                className="p-4 md:p-8 h-full"
               >
                 {!canAccessPOS ? (
                   <div className="flex flex-col items-center justify-center h-full text-center">
@@ -287,7 +287,7 @@ export default function App() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                className="p-8 h-full"
+                className="p-4 md:p-8 h-full"
               >
                 {currentRole !== UserRole.ADMIN ? (
                   <div className="flex flex-col items-center justify-center h-full text-center">

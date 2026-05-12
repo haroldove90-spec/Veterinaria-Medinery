@@ -31,7 +31,7 @@ interface SidebarItem {
 
 const menuItems: SidebarItem[] = [
   { 
-    title: 'Dashboard', 
+    title: 'Inicio', 
     icon: LayoutDashboard, 
     roles: [UserRole.ADMIN, UserRole.VETERINARIAN, UserRole.RECEPTION],
     path: '/',
@@ -59,7 +59,7 @@ const menuItems: SidebarItem[] = [
     view: 'pets'
   },
   { 
-    title: 'Propietarios', 
+    title: 'Dueños', 
     icon: Users, 
     roles: [UserRole.ADMIN, UserRole.RECEPTION],
     path: '/owners',
@@ -108,7 +108,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ userRole, userName, onNavigate
     >
       {/* Header / Logo */}
       <div className="h-20 flex items-center justify-center border-b border-white/10">
-        <div className="font-extrabold text-xl italic tracking-tighter">My<span className="text-medinery-teal">Doc</span></div>
+        <div className="font-extrabold text-xl italic tracking-tighter">Medinery<span className="text-medinery-teal font-medium not-italic ml-0.5">App</span></div>
       </div>
 
       {/* Navigation */}

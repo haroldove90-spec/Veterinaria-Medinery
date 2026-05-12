@@ -36,6 +36,7 @@ export const POSView: React.FC = () => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const filteredProducts = mockProducts.filter(p => 
     p.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -77,8 +78,9 @@ export const POSView: React.FC = () => {
     // Simulación de guardado en la tabla 'sales' y actualización de stock en 'products'
     await new Promise(resolve => setTimeout(resolve, 2000));
     setIsProcessing(false);
+    setShowSuccess(true);
     setCart([]);
-    alert('Venta realizada con éxito. Actualizando inventario...');
+    setTimeout(() => setShowSuccess(false), 3000);
   };
 
   return (
@@ -127,51 +129,69 @@ export const POSView: React.FC = () => {
       </div>
 
       {/* Cart / Checkout */}
-      <aside className="w-full lg:w-[400px] bg-white rounded-[40px] shadow-2xl border border-slate-100 flex flex-col overflow-hidden lg:h-full h-[50vh] shrink-0">
-        <div className="p-6 border-b border-[#F0EFEA] flex items-center gap-3 bg-[#FDFCF8]">
-          <div className="w-10 h-10 bg-[#4A5D4E] rounded-2xl flex items-center justify-center text-white">
-            <ShoppingCart size={20} />
+      <aside className="w-full lg:w-[400px] bg-white rounded-[40px] shadow-2xl border border-slate-100 flex flex-col overflow-hidden lg:h-full h-[60vh] shrink-0">
+        <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/30">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-medinery-blue rounded-2xl flex items-center justify-center text-white shadow-lg shadow-medinery-blue/20">
+              <ShoppingCart size={20} />
+            </div>
+            <h3 className="font-bold text-medinery-dark">Orden de Venta</h3>
           </div>
-          <h3 className="font-bold text-[#4A5D4E]">Carrito de Venta</h3>
+          <button onClick={() => setCart([])} className="text-[10px] font-black text-rose-400 uppercase tracking-widest hover:text-rose-600 transition-colors">Vaciar</button>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-6 space-y-4 no-scrollbar">
+        <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-4 no-scrollbar relative">
           <AnimatePresence>
+            {showSuccess && (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute inset-0 bg-white/90 backdrop-blur-sm z-50 flex flex-col items-center justify-center p-6 text-center"
+              >
+                <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-4 shadow-xl">
+                  <Receipt size={40} />
+                </div>
+                <h4 className="text-xl font-black text-slate-900">¡Venta Exitosa!</h4>
+                <p className="text-sm font-medium text-slate-500 mt-2">El inventario se ha actualizado correctamente.</p>
+              </motion.div>
+            )}
+
             {cart.map(item => (
               <motion.div 
                 key={item.id}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
-                className="flex items-center gap-4 p-3 rounded-2xl hover:bg-[#F9F9F7] transition-colors group"
+                className="flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-colors group"
               >
-                <div className="flex-1">
-                  <h5 className="text-sm font-bold text-[#2D3436]">{item.name}</h5>
-                  <p className="text-xs text-[#7F8C8D] font-medium tracking-wide mt-0.5">${item.price} c/u</p>
+                <div className="flex-1 truncate">
+                  <h5 className="text-sm font-bold text-slate-900 truncate">{item.name}</h5>
+                  <p className="text-xs text-slate-400 font-medium tracking-wide mt-0.5">${item.price} c/u</p>
                 </div>
-                <div className="flex items-center gap-3 bg-white border border-[#F0EFEA] rounded-xl p-1">
-                  <button onClick={() => updateQuantity(item.id, -1)} className="p-1 text-[#7F8C8D] hover:text-[#4A5D4E] hover:bg-[#F9F9F7] rounded-md transition-all"><Minus size={14} /></button>
-                  <span className="text-xs font-bold text-[#2D3436] min-w-[20px] text-center">{item.quantity}</span>
-                  <button onClick={() => updateQuantity(item.id, 1)} className="p-1 text-[#7F8C8D] hover:text-[#4A5D4E] hover:bg-[#F9F9F7] rounded-md transition-all"><Plus size={14} /></button>
+                <div className="flex items-center gap-3 bg-white border border-slate-100 rounded-xl p-1 shadow-sm">
+                  <button onClick={() => updateQuantity(item.id, -1)} className="p-1 text-slate-400 hover:text-medinery-blue hover:bg-slate-50 rounded-md transition-all"><Minus size={14} /></button>
+                  <span className="text-xs font-bold text-slate-900 min-w-[20px] text-center">{item.quantity}</span>
+                  <button onClick={() => updateQuantity(item.id, 1)} className="p-1 text-slate-400 hover:text-medinery-blue hover:bg-slate-50 rounded-md transition-all"><Plus size={14} /></button>
                 </div>
                 <button 
                   onClick={() => removeFromCart(item.id)}
-                  className="p-2 text-rose-300 hover:text-rose-500 transition-colors"
+                  className="p-2 text-rose-200 hover:text-rose-500 transition-colors"
                 >
                   <Trash2 size={16} />
                 </button>
               </motion.div>
             ))}
           </AnimatePresence>
-          {cart.length === 0 && (
-            <div className="h-full flex flex-col items-center justify-center text-center opacity-40 py-12">
-              <ShoppingCart size={48} className="mb-4 text-[#A8B5A2]" />
-              <p className="text-sm font-bold uppercase tracking-widest text-[#7F8C8D]">El carrito está vacío</p>
+          {cart.length === 0 && !showSuccess && (
+            <div className="h-full flex flex-col items-center justify-center text-center opacity-30 py-12">
+              <ShoppingCart size={48} className="mb-4 text-slate-400" />
+              <p className="text-sm font-bold uppercase tracking-widest text-slate-400">Carrito vacío</p>
             </div>
           )}
         </div>
 
-        <div className="p-8 border-t border-slate-50 bg-slate-50/50 space-y-4">
+        <div className="p-6 md:p-8 border-t border-slate-100 bg-slate-50/50 space-y-4">
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
               <span className="text-slate-500 font-bold uppercase tracking-widest text-[10px]">Subtotal</span>
@@ -183,15 +203,15 @@ export const POSView: React.FC = () => {
             </div>
           </div>
           <div className="flex justify-between items-end pt-4 border-t border-dashed border-slate-200">
-            <span className="text-[10px] font-black text-indigo-600 uppercase tracking-[0.2em]">Total Cobro</span>
-            <span className="text-4xl font-black text-slate-900 tracking-tighter">${total.toFixed(2)}</span>
+            <span className="text-[10px] font-black text-medinery-blue uppercase tracking-[0.2em]">Total Cobro</span>
+            <span className="text-3xl md:text-4xl font-black text-slate-900 tracking-tighter">${total.toFixed(2)}</span>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 mt-6">
-            <button className="flex flex-col items-center justify-center gap-2 py-4 bg-white border border-slate-100 rounded-3xl text-[10px] font-black text-slate-600 hover:border-indigo-600 hover:text-indigo-600 transition-all uppercase tracking-widest shadow-sm">
+          <div className="grid grid-cols-2 gap-3 mt-4 md:mt-6">
+            <button className="flex flex-col items-center justify-center gap-2 py-3 md:py-4 bg-white border border-slate-100 rounded-3xl text-[10px] font-black text-slate-600 hover:border-medinery-blue hover:text-medinery-blue transition-all uppercase tracking-widest shadow-sm">
               <Banknote size={20} /> Efectivo
             </button>
-            <button className="flex flex-col items-center justify-center gap-2 py-4 bg-white border border-slate-100 rounded-3xl text-[10px] font-black text-slate-600 hover:border-indigo-600 hover:text-indigo-600 transition-all uppercase tracking-widest shadow-sm">
+            <button className="flex flex-col items-center justify-center gap-2 py-3 md:py-4 bg-white border border-slate-100 rounded-3xl text-[10px] font-black text-slate-600 hover:border-medinery-blue hover:text-medinery-blue transition-all uppercase tracking-widest shadow-sm">
               <CreditCard size={20} /> Tarjeta
             </button>
           </div>
@@ -199,7 +219,7 @@ export const POSView: React.FC = () => {
           <button 
             onClick={handleCheckout}
             disabled={cart.length === 0 || isProcessing}
-            className="w-full bg-slate-900 text-white py-5 rounded-[24px] font-black uppercase tracking-[0.2em] text-[10px] shadow-2xl hover:bg-black transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2 flex items-center justify-center gap-3"
+            className="w-full bg-medinery-dark text-white py-4 md:py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] shadow-2xl hover:bg-black transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-2 flex items-center justify-center gap-3"
           >
             {isProcessing ? (
               <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />

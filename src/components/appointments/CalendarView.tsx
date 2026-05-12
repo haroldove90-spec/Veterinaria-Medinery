@@ -46,43 +46,44 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
 
   return (
-    <div className="flex flex-col h-full bg-white rounded-3xl shadow-sm border border-[#F0EFEA] overflow-hidden">
+    <div className="flex flex-col h-full bg-white rounded-[32px] shadow-sm border border-slate-100 overflow-hidden">
       {/* Calendar Header */}
-      <div className="p-6 border-b border-[#F0EFEA] flex justify-between items-center bg-[#F9F9F7]">
-        <div className="flex items-center gap-4">
-          <h2 className="text-xl font-bold text-[#4A5D4E]">Mayo 2026</h2>
-          <div className="flex bg-white border border-[#F0EFEA] rounded-lg overflow-hidden shadow-sm">
-            <button className="p-2 hover:bg-[#F0EFEA] text-[#7F8C8D] transition-colors"><ChevronLeft size={18} /></button>
-            <button className="p-2 hover:bg-[#F0EFEA] text-[#7F8C8D] border-l border-[#F0EFEA] transition-colors"><ChevronRight size={18} /></button>
+      <div className="p-4 md:p-6 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-center bg-slate-50/50 gap-4">
+        <div className="flex items-center gap-3 md:gap-4 w-full sm:w-auto justify-between sm:justify-start">
+          <h2 className="text-lg md:text-xl font-extrabold text-medinery-dark tracking-tight">Mayo 2026</h2>
+          <div className="flex items-center gap-2">
+            <div className="flex bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+              <button className="p-2 hover:bg-slate-50 text-slate-500 transition-colors"><ChevronLeft size={18} /></button>
+              <button className="p-2 hover:bg-slate-50 text-slate-500 border-l border-slate-200 transition-colors"><ChevronRight size={18} /></button>
+            </div>
+            <button className="text-[10px] font-black text-medinery-blue uppercase tracking-widest hover:underline px-2">Hoy</button>
           </div>
-          <button className="text-xs font-bold text-[#4A5D4E] uppercase tracking-widest hover:underline">Hoy</button>
         </div>
 
         <button 
           onClick={onAddAppointment}
-          className="bg-[#4A5D4E] text-white px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest flex items-center gap-2 hover:bg-[#5D6F61] transition-all shadow-md active:scale-95"
+          className="w-full sm:w-auto bg-medinery-blue text-white px-6 py-3 rounded-2xl font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-medinery-dark transition-all shadow-lg shadow-medinery-blue/20 active:scale-95"
         >
           <Plus size={18} />
-          Nueva Cita
+          <span className="sm:inline">Nueva Cita</span>
         </button>
       </div>
 
       {/* Week Days */}
-      <div className="grid grid-cols-7 bg-[#F9F9F7] border-b border-[#F0EFEA]">
+      <div className="grid grid-cols-7 bg-slate-50/30 border-b border-slate-100">
         {['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'].map(day => (
-          <div key={day} className="py-3 text-center text-[10px] font-bold text-[#A8B5A2] uppercase tracking-widest leading-none">
+          <div key={day} className="py-3 text-center text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none">
             {day}
           </div>
         ))}
       </div>
 
       {/* Calendar Content */}
-      <div className="flex-1 grid grid-cols-7 overflow-y-auto no-scrollbar">
+      <div className="flex-1 grid grid-cols-7 overflow-y-auto no-scrollbar bg-slate-50/10">
         {/* Espacios vacíos para el inicio del mes (simulado) */}
-        <div className="border-r border-b border-[#F0EFEA] p-2 bg-[#FCFCFA]/50 h-32 md:h-40" />
-        <div className="border-r border-b border-[#F0EFEA] p-2 bg-[#FCFCFA]/50 h-32 md:h-40" />
-        <div className="border-r border-b border-[#F0EFEA] p-2 bg-[#FCFCFA]/50 h-32 md:h-40" />
-        <div className="border-r border-b border-[#F0EFEA] p-2 bg-[#FCFCFA]/50 h-32 md:h-40" />
+        {[...Array(4)].map((_, i) => (
+          <div key={`empty-${i}`} className="border-r border-b border-slate-100 p-1 md:p-2 bg-slate-50/20 h-24 md:h-40" />
+        ))}
 
         {days.map(day => {
           const isToday = day === 12;
@@ -91,18 +92,18 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
           return (
             <div 
               key={day} 
-              className={`border-r border-b border-[#F0EFEA] p-2 h-32 md:h-40 transition-colors hover:bg-[#F9F9F7] cursor-pointer group ${isToday ? 'bg-[#FBF5ED]/30' : ''}`}
+              className={`border-r border-b border-slate-100 p-1 md:p-2 h-24 md:h-40 transition-colors hover:bg-white cursor-pointer group relative ${isToday ? 'bg-medinery-blue/5' : 'bg-white'}`}
             >
-              <div className="flex justify-between items-start mb-2">
-                <span className={`w-7 h-7 flex items-center justify-center rounded-full text-xs font-bold ${isToday ? 'bg-[#4A5D4E] text-white' : 'text-[#7F8C8D]'}`}>
+              <div className="flex justify-between items-start mb-1">
+                <span className={`w-6 h-6 md:w-8 md:h-8 flex items-center justify-center rounded-lg text-xs font-black ${isToday ? 'bg-medinery-blue text-white shadow-md shadow-medinery-blue/20' : 'text-slate-400 group-hover:text-medinery-dark'}`}>
                   {day}
                 </span>
                 {dayAppointments.length > 0 && (
-                  <span className="text-[10px] font-bold text-[#A8B5A2] uppercase">{dayAppointments.length} Citas</span>
+                  <span className="hidden md:block text-[9px] font-black text-slate-300 uppercase">{dayAppointments.length} Citas</span>
                 )}
               </div>
 
-              <div className="space-y-1 overflow-y-hidden">
+              <div className="space-y-1 overflow-hidden">
                 {dayAppointments.map(appt => (
                   <motion.div
                     key={appt.id}
@@ -111,13 +112,13 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
                       e.stopPropagation();
                       onSelectAppointment(appt);
                     }}
-                    className={`px-2 py-1.5 rounded-lg border text-[9px] font-medium leading-tight truncate shadow-sm transition-all ${statusColors[appt.status]}`}
+                    className={`px-1.5 py-1 rounded-lg border text-[8px] md:text-[9px] font-bold leading-tight truncate shadow-sm transition-all ${statusColors[appt.status]}`}
                   >
                     <div className="flex items-center gap-1">
-                      <span>{serviceIcons[appt.service_type]}</span>
-                      <span className="font-bold uppercase tracking-tighter">{appt.time}</span>
+                      <span className="hidden sm:inline">{serviceIcons[appt.service_type]}</span>
+                      <span className="uppercase tracking-tighter">{appt.time}</span>
                     </div>
-                    <div className="truncate opacity-90">{appt.pet_name}</div>
+                    <div className="hidden md:block truncate opacity-80">{appt.pet_name}</div>
                   </motion.div>
                 ))}
               </div>
@@ -127,11 +128,11 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
       </div>
 
       {/* Legend */}
-      <div className="p-4 bg-white border-t border-[#F0EFEA] flex gap-6 overflow-x-auto no-scrollbar">
+      <div className="p-4 bg-white border-t border-slate-100 flex gap-4 md:gap-6 overflow-x-auto no-scrollbar">
         {Object.entries(AppointmentStatus).map(([key, status]) => (
           <div key={status} className="flex items-center gap-2 shrink-0">
-            <Circle size={10} className={`${statusColors[status].split(' ')[0]} fill-current`} />
-            <span className="text-[10px] font-bold text-[#7F8C8D] uppercase tracking-widest">{status.replace('_', ' ')}</span>
+            <div className={`w-2 h-2 rounded-full ${statusColors[status].split(' ')[0]} border border-current opacity-60`} />
+            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">{status.replace('_', ' ')}</span>
           </div>
         ))}
       </div>

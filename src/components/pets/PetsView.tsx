@@ -19,11 +19,31 @@ const mockPets: Pet[] = [
 
 export const PetsView: React.FC = () => {
   const [search, setSearch] = useState('');
+  const [isAdding, setIsAdding] = useState(false);
+  const [pets, setPets] = useState<Pet[]>(mockPets);
   
-  const filtered = mockPets.filter(p => 
+  const filtered = pets.filter(p => 
     p.name.toLowerCase().includes(search.toLowerCase()) || 
     p.breed.toLowerCase().includes(search.toLowerCase())
   );
+
+  const handleAddPet = () => {
+    setIsAdding(true);
+    setTimeout(() => {
+      const newPet: Pet = {
+        id: Math.random().toString(36).substr(2, 9),
+        name: 'Mascota Demo',
+        breed: 'Raza Mixta',
+        species: Math.random() > 0.5 ? 'Perro' : 'Gato',
+        age: 1,
+        weight: 10,
+        owner_id: '1',
+        photo_url: ''
+      };
+      setPets([newPet, ...pets]);
+      setIsAdding(false);
+    }, 1500);
+  };
 
   return (
     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -32,8 +52,17 @@ export const PetsView: React.FC = () => {
           <h1 className="text-2xl font-black text-slate-900 tracking-tight">Gestión de Mascotas</h1>
           <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Directorio Centralizado</p>
         </div>
-        <button className="flex items-center gap-2 px-6 py-3 bg-medinery-blue text-white rounded-2xl text-sm font-bold shadow-lg shadow-medinery-blue/10 hover:bg-medinery-dark transition-all">
-          <Plus size={18} /> Registrar Mascota
+        <button 
+          onClick={handleAddPet}
+          disabled={isAdding}
+          className="flex items-center gap-2 px-6 py-3 bg-medinery-blue text-white rounded-2xl text-sm font-bold shadow-lg shadow-medinery-blue/10 hover:bg-medinery-dark transition-all disabled:opacity-50"
+        >
+          {isAdding ? (
+            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+          ) : (
+            <Plus size={18} />
+          )}
+          {isAdding ? 'Registrando...' : 'Registrar Mascota'}
         </button>
       </div>
 
