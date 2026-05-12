@@ -90,7 +90,7 @@ export default function App() {
   }
 
   return (
-    <div className="flex h-screen w-full overflow-hidden font-sans bg-[#FDFCF8] relative">
+    <div className="flex h-screen w-full overflow-hidden font-sans bg-slate-50 relative">
       {/* Mobile Sidebar Overlay */}
       <AnimatePresence>
         {isSidebarOpen && (

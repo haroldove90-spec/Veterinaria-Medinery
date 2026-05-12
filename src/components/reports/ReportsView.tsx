@@ -93,7 +93,7 @@ export const ReportsView: React.FC = () => {
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="bg-white p-8 rounded-[40px] border border-slate-100 shadow-sm">
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 bg-indigo-50 text-indigo-600 rounded-xl"><TrendingUp size={20} /></div>
+            <div className="p-2 bg-medinery-blue/5 text-medinery-blue rounded-xl"><TrendingUp size={20} /></div>
             <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Total Ingresos</span>
           </div>
           <p className="text-3xl font-black text-slate-900">$15,400.00</p>
@@ -183,7 +183,7 @@ export const ReportsView: React.FC = () => {
                 className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-transparent hover:border-slate-100 transition-all cursor-pointer group"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center text-slate-400 group-hover:text-indigo-600 transition-colors">
+                  <div className="w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center text-slate-400 group-hover:text-medinery-blue transition-colors">
                     <FileText size={20} />
                   </div>
                   <div>
@@ -194,7 +194,7 @@ export const ReportsView: React.FC = () => {
                 <div className="flex items-center gap-6">
                   <span className="text-sm font-black text-slate-900">{rep.total}</span>
                   <div className="p-2 rounded-lg bg-white shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Download size={16} className="text-indigo-600" />
+                    <Download size={16} className="text-medinery-blue" />
                   </div>
                 </div>
               </motion.div>

@@ -5,263 +5,296 @@
 
 import React from 'react';
 import { 
-  Users, 
-  Dog, 
-  Calendar, 
-  TrendingUp, 
-  AlertTriangle, 
-  ArrowUpRight, 
-  ArrowDownRight,
-  MoreHorizontal,
-  Plus
+  CheckCircle2, 
+  XCircle, 
+  FileText, 
+  Download, 
+  ChevronDown,
+  Star,
+  Users,
+  Grid,
+  Bell
 } from 'lucide-react';
 import { 
-  BarChart, 
-  Bar, 
   XAxis, 
   YAxis, 
   CartesianGrid, 
   Tooltip, 
   ResponsiveContainer,
   AreaChart,
-  Area
+  Area,
+  PieChart,
+  Pie,
+  Cell
 } from 'recharts';
 import { motion } from 'motion/react';
-import { AppointmentStatus, ServiceType } from '../../types';
+import { AppointmentStatus } from '../../types';
 
-// --- Realistic Mock Data ---
-const mockData = {
-  stats: [
-    { title: 'Pacientes Totales', value: '1,248', trend: '+12%', isUp: true, icon: Dog, color: 'text-blue-600', bg: 'bg-blue-50' },
-    { title: 'Citas Hoy', value: '24', trend: '4 urgentes', isUp: true, icon: Calendar, color: 'text-indigo-600', bg: 'bg-indigo-50' },
-    { title: 'Ingresos Mes', value: '$12,450', trend: '+8.2%', isUp: true, icon: TrendingUp, color: 'text-emerald-600', bg: 'bg-emerald-50' },
-    { title: 'Stock Bajo', value: '3', trend: 'Acción requerida', isUp: false, icon: AlertTriangle, color: 'text-rose-600', bg: 'bg-rose-50' },
-  ],
-  appointmentFlow: [
-    { name: 'Lun', appointments: 18 },
-    { name: 'Mar', appointments: 25 },
-    { name: 'Mié', appointments: 22 },
-    { name: 'Jue', appointments: 30 },
-    { name: 'Vie', appointments: 28 },
-    { name: 'Sáb', appointments: 15 },
-    { name: 'Dom', appointments: 8 },
-  ],
-  todayAppointments: [
-    { id: '1', pet: 'Max', breed: 'Golden Retriever', owner: 'Laura Martínez', status: AppointmentStatus.IN_PROGRESS, time: '09:00', type: ServiceType.CONSULTA },
-    { id: '2', pet: 'Luna', breed: 'Gato Siamés', owner: 'Carlos Ruíz', status: AppointmentStatus.PENDING, time: '10:30', type: ServiceType.VACUNACION },
-    { id: '3', pet: 'Bruno', breed: 'Bulldog Francés', owner: 'Ana Silva', status: AppointmentStatus.COMPLETED, time: '11:45', type: ServiceType.ESTETICA },
-    { id: '4', pet: 'Milo', breed: 'Pug', owner: 'Roberto Torres', status: AppointmentStatus.PENDING, time: '14:00', type: ServiceType.CONSULTA },
-    { id: '5', pet: 'Kira', breed: 'Pastror Alemán', owner: 'Elena Gómez', status: AppointmentStatus.CANCELLED, time: '16:30', type: ServiceType.CIRUGIA },
-  ],
-  inventoryAlerts: [
-    { name: 'Vacuna Triple Felina', stock: 2, unit: 'viales', status: 'critical' },
-    { name: 'Alimento Renal 2kg', stock: 4, unit: 'bolsas', status: 'low' },
-    { name: 'Antibiótico Amoxi', stock: 1, unit: 'frascos', status: 'critical' },
-  ]
-};
+// --- Improved Data Structure for Visual Representation ---
+const performanceData = [
+  { name: 'Jan', value: 300 },
+  { name: 'Feb', value: 200 },
+  { name: 'Mar', value: 250 },
+  { name: 'Apr', value: 220 },
+  { name: 'May', value: 280 },
+  { name: 'Jun', value: 400 },
+  { name: 'Jul', value: 300 },
+  { name: 'Aug', value: 320 },
+  { name: 'Sep', value: 250 },
+  { name: 'Oct', value: 280 },
+  { name: 'Nov', value: 220 },
+  { name: 'Dec', value: 350 },
+];
 
-const statusConfig: Record<AppointmentStatus, { label: string, color: string }> = {
-  [AppointmentStatus.PENDING]: { label: 'Esperando', color: 'bg-blue-100 text-blue-700 border-blue-200' },
-  [AppointmentStatus.IN_PROGRESS]: { label: 'En Consulta', color: 'bg-amber-100 text-amber-700 border-amber-200' },
-  [AppointmentStatus.COMPLETED]: { label: 'Completado', color: 'bg-emerald-100 text-emerald-700 border-emerald-200' },
-  [AppointmentStatus.CANCELLED]: { label: 'Cancelado', color: 'bg-rose-100 text-rose-700 border-rose-200' },
-};
+const genderData = [
+  { name: 'Male', value: 4000, color: '#0A58CA' },
+  { name: 'Female', value: 1000, color: '#E2E8F0' },
+];
+
+const appointments = [
+  { id: 1, name: 'Linda Brown', time: '08:00 AM', status: 'confirmed', type: 'First visit' },
+  { id: 2, name: 'Nelly Dean', time: '09:00 AM', status: 'confirmed', type: 'First visit' },
+  { id: 3, name: 'John Doe', time: '10:00 AM', status: 'confirmed', type: 'First visit' },
+  { id: 4, name: 'James Vane', time: '10:45 AM', status: 'confirmed', type: 'First visit' },
+  { id: 5, name: 'Mary Smith', time: '11:00 AM', status: 'cancelled', type: 'Consultation' },
+];
+
+const patientFiles = [
+  { name: 'Linda Pres***.pdf', id: '1' },
+  { name: 'John Checkup.pdf', id: '2' },
+  { name: 'James Pres***.pdf', id: '3' },
+  { name: 'Nelly X-ray result.pdf', id: '4' },
+];
+
+const doctorReviews = [
+  { id: 1, name: 'Linda Brown', text: 'Dr. James is a great doctor!' },
+  { id: 2, name: 'John Doe', text: 'Dr. James is my favorite' },
+  { id: 3, name: 'James Vane', text: 'Thanks Doc!' },
+];
 
 export const DashboardView: React.FC = () => {
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-      {/* Header Section */}
+    <div className="p-8 space-y-8 animate-in fade-in duration-700 bg-[#F8FAFD] min-h-screen">
+      {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Panel de Control</h1>
-          <p className="text-slate-500 mt-1 font-medium">Bienvenido de nuevo, Dr. Alejandro Pérez.</p>
+          <h1 className="text-3xl font-bold text-medinery-dark">Hello James!</h1>
+          <p className="text-slate-500 font-medium text-sm mt-1">
+            Welcome James to Our Platform.<br/>
+            Let's help patients to live a healthier and happier life
+          </p>
         </div>
-        <div className="flex items-center gap-3">
-          <button className="flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 hover:bg-slate-50 transition-all shadow-sm">
-            Descargar Reporte
+        <div className="flex items-center gap-4">
+          <button className="w-10 h-10 bg-medinery-teal text-white rounded-lg flex items-center justify-center shadow-lg shadow-medinery-teal/20">
+            <Grid size={18} />
           </button>
-          <button className="flex items-center gap-2 px-6 py-2.5 bg-indigo-600 text-white rounded-xl text-sm font-bold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200">
-            <Plus size={18} />
-            Nueva Cita
+          <button className="w-10 h-10 bg-white border border-slate-200 text-slate-400 rounded-lg flex items-center justify-center shadow-sm">
+            <Bell size={18} />
           </button>
         </div>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {mockData.stats.map((stat, i) => (
-          <motion.div
-            key={stat.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
-            className="bg-white p-6 rounded-[32px] border border-slate-100 shadow-sm hover:shadow-md transition-all group"
-          >
-            <div className="flex justify-between items-start mb-4">
-              <div className={`p-3 rounded-2xl ${stat.bg} ${stat.color}`}>
-                <stat.icon size={24} />
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        {/* Left Section (Column 1 & 2) */}
+        <div className="lg:col-span-2 space-y-8">
+          {/* Income Chart Card */}
+          <div className="bg-white rounded-[32px] p-8 shadow-sm border border-slate-100 flex flex-col h-[400px]">
+            <div className="flex justify-between items-center mb-10">
+              <h2 className="text-lg font-bold text-medinery-dark">Doctor Salary</h2>
+              <button className="flex items-center gap-2 px-4 py-1.5 bg-medinery-teal text-white rounded-lg text-xs font-bold">
+                Yearly <ChevronDown size={14} />
+              </button>
+            </div>
+            <div className="flex-1">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={performanceData}>
+                  <defs>
+                    <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#0A58CA" stopOpacity={0.1}/>
+                      <stop offset="95%" stopColor="#0A58CA" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E2E8F0" opacity={0.5} />
+                  <XAxis 
+                    dataKey="name" 
+                    axisLine={false} 
+                    tickLine={false} 
+                    tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 600 }}
+                  />
+                  <YAxis hide />
+                  <Tooltip 
+                    contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)' }}
+                  />
+                  <Area 
+                    type="monotone" 
+                    dataKey="value" 
+                    stroke="#0A58CA" 
+                    strokeWidth={3}
+                    fillOpacity={1} 
+                    fill="url(#colorValue)" 
+                    dot={{ r: 4, fill: '#fff', stroke: '#0A58CA', strokeWidth: 2 }}
+                    activeDot={{ r: 6 }}
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="flex justify-around mt-6 border-t border-slate-50 pt-6">
+              <div className="text-center">
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">This Week</p>
+                <p className="text-2xl font-black text-medinery-blue">$259</p>
               </div>
-              <div className={`flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider ${stat.isUp ? 'text-emerald-600' : 'text-rose-600'}`}>
-                {stat.isUp ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
-                {stat.trend}
+              <div className="text-center">
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">This Month</p>
+                <p className="text-2xl font-black text-medinery-blue">$873</p>
               </div>
             </div>
-            <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest">{stat.title}</h3>
-            <p className="text-3xl font-black text-slate-900 mt-1">{stat.value}</p>
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Main Chart */}
-        <div className="lg:col-span-2 bg-white rounded-[40px] p-8 border border-slate-100 shadow-sm">
-          <div className="flex justify-between items-center mb-8">
-            <div>
-              <h2 className="text-xl font-bold text-slate-900">Flujo de Consultas</h2>
-              <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Semanas anteriores vs actual</p>
-            </div>
-            <select className="bg-slate-50 border-none text-xs font-bold text-slate-500 rounded-lg py-2 px-3 focus:ring-0">
-              <option>Últimos 7 días</option>
-              <option>Últimos 30 días</option>
-            </select>
           </div>
-          
-          <div className="h-[300px] w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={mockData.appointmentFlow}>
-                <defs>
-                  <linearGradient id="colorApp" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.1}/>
-                    <stop offset="95%" stopColor="#4f46e5" stopOpacity={0}/>
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                <XAxis 
-                  dataKey="name" 
-                  axisLine={false} 
-                  tickLine={false} 
-                  tick={{ fill: '#94a3b8', fontSize: 12, fontWeight: 600 }}
-                  dy={10}
-                />
-                <YAxis 
-                  axisLine={false} 
-                  tickLine={false} 
-                  tick={{ fill: '#94a3b8', fontSize: 12, fontWeight: 600 }}
-                />
-                <Tooltip 
-                  contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)', padding: '12px' }}
-                  itemStyle={{ fontWeight: 700, color: '#4f46e5' }}
-                />
-                <Area 
-                  type="monotone" 
-                  dataKey="appointments" 
-                  stroke="#4f46e5" 
-                  strokeWidth={4}
-                  fillOpacity={1} 
-                  fill="url(#colorApp)" 
-                />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
 
-        {/* Small Widgets */}
-        <div className="space-y-8">
-          {/* Inventory Alerts */}
-          <div className="bg-slate-900 rounded-[40px] p-8 text-white shadow-2xl relative overflow-hidden group">
-            <div className="absolute -right-4 -top-4 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl group-hover:bg-indigo-500/20 transition-all duration-700" />
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-rose-500/20 text-rose-400 rounded-xl">
-                <AlertTriangle size={20} />
-              </div>
-              <h3 className="font-bold">Alertas de Inventario</h3>
+          {/* Duty Hour Calendar / Widget */}
+          <div className="bg-white rounded-[32px] p-8 shadow-sm border border-slate-100 h-fit">
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-lg font-bold text-medinery-dark">Duty Hour</h2>
+              <button className="flex items-center gap-2 px-4 py-1.5 bg-medinery-teal text-white rounded-lg text-xs font-bold">
+                Weekly <ChevronDown size={14} />
+              </button>
             </div>
-            <div className="space-y-4">
-              {mockData.inventoryAlerts.map((item, idx) => (
-                <div key={idx} className="flex justify-between items-center p-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
-                  <div>
-                    <p className="text-sm font-bold">{item.name}</p>
-                    <p className="text-[10px] text-white/50 uppercase tracking-widest">{item.stock} {item.unit} restantes</p>
-                  </div>
-                  <div className={`w-2 h-2 rounded-full ${item.status === 'critical' ? 'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.6)]' : 'bg-amber-500 opacity-60'}`} />
+            <div className="flex justify-between items-center gap-1">
+              {['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'].map((day, i) => (
+                <div key={day} className={`flex flex-col items-center p-3 rounded-2xl w-full max-w-[60px] transition-all cursor-pointer ${day === 'Mon' ? 'bg-medinery-blue text-white shadow-xl shadow-medinery-blue/30 scale-110' : 'text-slate-400 hover:bg-slate-50'}`}>
+                  <span className="text-[10px] font-bold mb-2">{day}</span>
+                  <span className="text-lg font-black">{9 + i - (i > 3 ? 5 : 0)}</span>
                 </div>
               ))}
             </div>
-            <button className="w-full mt-6 py-3 rounded-2xl bg-white text-slate-900 text-xs font-bold uppercase tracking-widest hover:bg-indigo-50 transition-colors">
-              Gestionar Stock
+            <button className="w-full mt-8 py-3 bg-medinery-blue rounded-full text-white font-bold text-sm shadow-xl shadow-medinery-blue/20 flex items-center justify-center gap-2">
+              <span className="text-xl font-black">49 hours</span>
+              <span className="opacity-60 text-xs font-medium italic">Avg Duty Hour</span>
             </button>
           </div>
-
-          {/* Quick Info Card */}
-          <div className="bg-indigo-600 rounded-[40px] p-8 text-white shadow-xl relative animate-pulse">
-            <h3 className="text-xl font-bold leading-tight">Nueva Actualización</h3>
-            <p className="text-indigo-100 text-xs mt-2 leading-relaxed opacity-80">El módulo de telemetría médica ya está activo. Revisa reportes avanzados en el menú.</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Appointments Table */}
-      <div className="bg-white rounded-[40px] p-8 border border-slate-100 shadow-sm">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-          <div>
-            <h2 className="text-xl font-bold text-slate-900">Agenda para Hoy</h2>
-            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">12 de Mayo, 2026 • 24 Citas programadas</p>
-          </div>
-          <div className="flex bg-slate-50 p-1 rounded-xl border border-slate-100">
-            <button className="px-4 py-2 text-[10px] font-bold uppercase bg-white text-indigo-600 rounded-lg shadow-sm">Lista</button>
-            <button className="px-4 py-2 text-[10px] font-bold uppercase text-slate-400">Timeline</button>
-          </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left">
-            <thead>
-              <tr className="border-b border-slate-50">
-                <th className="pb-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-4">Hora</th>
-                <th className="pb-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Paciente</th>
-                <th className="pb-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Propietario</th>
-                <th className="pb-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Servicio</th>
-                <th className="pb-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-right pr-4">Estado</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-50">
-              {mockData.todayAppointments.map((appt) => (
-                <tr key={appt.id} className="group hover:bg-slate-50/50 transition-colors">
-                  <td className="py-5 pl-4">
-                    <span className="text-sm font-black text-slate-900">{appt.time}</span>
-                  </td>
-                  <td className="py-5">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-indigo-50 rounded-2xl flex items-center justify-center text-indigo-600 font-bold">
-                        {appt.pet[0]}
-                      </div>
-                      <div>
-                        <p className="text-sm font-bold text-slate-900">{appt.pet}</p>
-                        <p className="text-[10px] text-slate-400 font-medium uppercase">{appt.breed}</p>
-                      </div>
+        {/* Center Section (Column 3) */}
+        <div className="space-y-8">
+          {/* Gender Distribution Chart */}
+          <div className="bg-white rounded-[32px] p-8 shadow-sm border border-slate-100">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-lg font-bold text-medinery-dark">Patient Gender</h2>
+              <button className="text-medinery-teal text-[10px] font-black uppercase tracking-widest hover:underline">View All</button>
+            </div>
+            <div className="flex items-center gap-8">
+              <div className="space-y-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-medinery-blue rounded-full" />
+                  <span className="text-xs font-bold text-slate-500">4000 Male</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-slate-200 rounded-full" />
+                  <span className="text-xs font-bold text-slate-500">1000 Female</span>
+                </div>
+              </div>
+              <div className="relative w-32 h-32 mx-auto">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={genderData}
+                      innerRadius={40}
+                      outerRadius={55}
+                      paddingAngle={5}
+                      dataKey="value"
+                    >
+                      {genderData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                  </PieChart>
+                </ResponsiveContainer>
+                <div className="absolute inset-0 flex items-center justify-center font-black text-lg text-medinery-dark">
+                  80%
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Upcoming Appointment List */}
+          <div className="bg-white rounded-[32px] p-8 shadow-sm border border-slate-100 flex flex-col flex-1 min-h-[460px]">
+            <h2 className="text-lg font-bold text-medinery-dark mb-8">Upcoming Appointment</h2>
+            <div className="space-y-6 flex-1">
+              {appointments.map((appt) => (
+                <div key={appt.id} className="flex items-center justify-between group">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-slate-200 rounded-full overflow-hidden flex-shrink-0" />
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-900 line-clamp-1">{appt.name}</h4>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{appt.type}</p>
                     </div>
-                  </td>
-                  <td className="py-5">
-                    <p className="text-sm text-slate-600 font-medium">{appt.owner}</p>
-                  </td>
-                  <td className="py-5">
-                    <span className="text-[10px] font-bold text-slate-500 uppercase bg-slate-100 px-2 py-1 rounded-md">{appt.type}</span>
-                  </td>
-                  <td className="py-5 text-right pr-4">
-                    <span className={`px-3 py-1.5 rounded-xl text-[10px] font-bold uppercase tracking-wider border transition-all ${statusConfig[appt.status].color}`}>
-                      {statusConfig[appt.status].label}
-                    </span>
-                  </td>
-                </tr>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <span className="text-[10px] font-black text-slate-900 bg-slate-50 px-2 py-1 rounded-md">{appt.time}</span>
+                    {appt.status === 'confirmed' ? (
+                      <CheckCircle2 size={16} className="text-medinery-teal" />
+                    ) : (
+                      <XCircle size={16} className="text-rose-500" />
+                    )}
+                  </div>
+                </div>
               ))}
-            </tbody>
-          </table>
+            </div>
+          </div>
         </div>
-        
-        <div className="mt-8 pt-8 border-t border-slate-50 flex justify-center">
-          <button className="text-[10px] font-bold uppercase tracking-widest text-indigo-600 hover:underline">
-            Cargar todas las citas del día
-          </button>
+
+        {/* Right Section (Column 4) */}
+        <div className="space-y-8">
+          {/* Profile Card */}
+          <div className="bg-white rounded-[32px] p-8 shadow-sm border border-slate-100 text-center relative overflow-hidden group">
+            <h2 className="text-xs font-black uppercase text-slate-400 tracking-widest text-left mb-8">Profile</h2>
+            <div className="w-24 h-24 bg-slate-200 rounded-full mx-auto mb-4 border-4 border-white shadow-lg shadow-slate-200/50" />
+            <h3 className="text-lg font-black text-slate-900 tracking-tight">Dr James Smith</h3>
+            <p className="text-xs font-bold text-medinery-blue italic ">Cardiologists doctors</p>
+            
+            <div className="flex justify-around items-center mt-8 pt-8 border-t border-slate-50 mb-8">
+              <div className="flex flex-col items-center">
+                <Star className="text-medinery-blue mb-1" size={14} fill="currentColor" />
+                <span className="text-sm font-black text-slate-900">4.5 Rating</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <Users className="text-medinery-blue mb-1" size={14} />
+                <span className="text-sm font-black text-slate-900">115 Patient</span>
+              </div>
+            </div>
+
+            <div className="space-y-4 text-left">
+              {doctorReviews.map(review => (
+                <div key={review.id} className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-slate-200 shrink-0" />
+                  <div>
+                    <h5 className="text-[10px] font-black text-slate-900">{review.name}</h5>
+                    <p className="text-[10px] text-slate-500 font-medium italic">{review.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Patient Files */}
+          <div className="bg-white rounded-[32px] p-8 shadow-sm border border-slate-100">
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-lg font-bold text-medinery-dark">Patient File</h2>
+              <button className="text-medinery-teal text-[10px] font-black uppercase tracking-widest bg-medinery-teal/10 px-3 py-1 rounded-lg">View As</button>
+            </div>
+            <div className="space-y-4">
+              {patientFiles.map(file => (
+                <div key={file.id} className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 group hover:bg-medinery-blue/5 transition-all">
+                  <div className="flex items-center gap-3">
+                    <FileText className="text-medinery-blue" size={16} />
+                    <span className="text-xs font-bold text-slate-700 truncate max-w-[120px]">{file.name}</span>
+                  </div>
+                  <button className="w-8 h-8 rounded-lg bg-medinery-blue/10 text-medinery-blue flex items-center justify-center group-hover:bg-medinery-blue group-hover:text-white transition-all shadow-sm">
+                    <Download size={14} />
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

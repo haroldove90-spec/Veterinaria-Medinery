@@ -32,14 +32,14 @@ export const PetsView: React.FC = () => {
           <h1 className="text-2xl font-black text-slate-900 tracking-tight">Gestión de Mascotas</h1>
           <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Directorio Centralizado</p>
         </div>
-        <button className="flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-2xl text-sm font-bold shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all">
+        <button className="flex items-center gap-2 px-6 py-3 bg-medinery-blue text-white rounded-2xl text-sm font-bold shadow-lg shadow-medinery-blue/10 hover:bg-medinery-dark transition-all">
           <Plus size={18} /> Registrar Mascota
         </button>
       </div>
 
       <div className="flex flex-col md:flex-row gap-4">
         <div className="flex-1 relative group">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-indigo-500 transition-colors" size={20} />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-medinery-blue transition-colors" size={20} />
           <input 
             type="text"
             placeholder="Buscar por nombre, raza o especie..."
@@ -60,11 +60,11 @@ export const PetsView: React.FC = () => {
             whileHover={{ y: -8 }}
             className="bg-white rounded-[32px] p-6 border border-slate-100 shadow-sm hover:shadow-xl transition-all relative overflow-hidden group"
           >
-            <div className={`absolute top-0 right-0 w-24 h-24 ${pet.species === 'Gato' ? 'bg-amber-50' : 'bg-indigo-50'} rounded-full -mr-12 -mt-12 opacity-50 transition-transform group-hover:scale-150`} />
+            <div className={`absolute top-0 right-0 w-24 h-24 ${pet.species === 'Gato' ? 'bg-amber-50' : 'bg-medinery-blue/5'} rounded-full -mr-12 -mt-12 opacity-50 transition-transform group-hover:scale-150`} />
             
             <div className="flex justify-between items-start mb-6">
               <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-xl font-black ${
-                pet.species === 'Gato' ? 'bg-amber-100 text-amber-600' : 'bg-indigo-100 text-indigo-600'
+                pet.species === 'Gato' ? 'bg-amber-100 text-amber-600' : 'bg-medinery-blue/10 text-medinery-blue'
               }`}>
                 {pet.name[0]}
               </div>
@@ -86,7 +86,7 @@ export const PetsView: React.FC = () => {
               </div>
             </div>
             
-            <button className="w-full mt-6 py-3 bg-slate-50 text-slate-400 rounded-xl text-[10px] font-black uppercase tracking-widest group-hover:bg-indigo-600 group-hover:text-white transition-all">
+            <button className="w-full mt-6 py-3 bg-slate-50 text-slate-400 rounded-xl text-[10px] font-black uppercase tracking-widest group-hover:bg-medinery-blue group-hover:text-white transition-all">
               Ver Expediente
             </button>
           </motion.div>

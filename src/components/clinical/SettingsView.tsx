@@ -19,17 +19,17 @@ export const SettingsView: React.FC = () => {
         {/* Profile Settings */}
         <section className="bg-white rounded-[40px] p-8 border border-slate-100 shadow-sm space-y-6">
           <div className="flex items-center gap-4 mb-2">
-            <div className="p-3 bg-indigo-50 text-indigo-600 rounded-2xl"><Building size={24} /></div>
+            <div className="p-3 bg-medinery-blue/10 text-medinery-blue rounded-2xl"><Building size={24} /></div>
             <h2 className="text-xl font-black text-slate-900 italic">Clínica</h2>
           </div>
           <div className="space-y-4">
             <div className="space-y-2">
               <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest pl-1">Nombre Comercial</label>
-              <input type="text" defaultValue="Veterinaria Medinery" className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-3 px-4 text-sm focus:ring-4 focus:ring-indigo-500/5 focus:border-indigo-500 outline-none transition-all font-bold" />
+              <input type="text" defaultValue="Veterinaria Medinery" className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-3 px-4 text-sm focus:ring-4 focus:ring-medinery-blue/5 focus:border-medinery-blue outline-none transition-all font-bold" />
             </div>
             <div className="space-y-2">
               <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest pl-1">Dirección Matriz</label>
-              <input type="text" defaultValue="Col. Roma Norte, CDMX" className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-3 px-4 text-sm focus:ring-4 focus:ring-indigo-500/5 focus:border-indigo-500 outline-none transition-all font-bold" />
+              <input type="text" defaultValue="Col. Roma Norte, CDMX" className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-3 px-4 text-sm focus:ring-4 focus:ring-medinery-blue/5 focus:border-medinery-blue outline-none transition-all font-bold" />
             </div>
             <div className="space-y-2">
               <label className="text-[10px] font-black uppercase text-slate-400 tracking-widest pl-1">Moneda del Sistema</label>
@@ -74,20 +74,20 @@ export const SettingsView: React.FC = () => {
         <section className="bg-white rounded-[40px] p-8 border border-slate-100 shadow-sm md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-4">
             <div className="flex items-center gap-3 text-slate-900 mb-2">
-              <Palette size={20} className="text-indigo-600" />
+              <Palette size={20} className="text-medinery-blue" />
               <h3 className="font-black text-lg">Apariencia</h3>
             </div>
             <div className="flex gap-2">
               <div className="w-10 h-10 rounded-full bg-slate-900 border-2 border-white ring-2 ring-slate-900 cursor-pointer" />
-              <div className="w-10 h-10 rounded-full bg-indigo-600 border-2 border-white cursor-pointer opacity-40" />
-              <div className="w-10 h-10 rounded-full bg-emerald-600 border-2 border-white cursor-pointer opacity-40" />
+              <div className="w-10 h-10 rounded-full bg-medinery-blue border-2 border-white cursor-pointer opacity-40" />
+              <div className="w-10 h-10 rounded-full bg-medinery-teal border-2 border-white cursor-pointer opacity-40" />
             </div>
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-2">Tema del sistema (Dark/Light)</p>
           </div>
 
           <div className="space-y-4">
             <div className="flex items-center gap-3 text-slate-900 mb-2">
-              <Bell size={20} className="text-indigo-600" />
+              <Bell size={20} className="text-medinery-blue" />
               <h3 className="font-black text-lg">Notificaciones</h3>
             </div>
             <div className="space-y-3">
@@ -104,14 +104,14 @@ export const SettingsView: React.FC = () => {
 
           <div className="space-y-4">
             <div className="flex items-center gap-3 text-slate-900 mb-2">
-              <Database size={20} className="text-indigo-600" />
+              <Database size={20} className="text-medinery-blue" />
               <h3 className="font-black text-lg">Seguridad</h3>
             </div>
             <div className="flex items-center gap-2 p-3 bg-emerald-50 rounded-2xl border border-emerald-100">
               <Shield size={16} className="text-emerald-600" />
               <span className="text-[10px] font-black text-emerald-700 uppercase tracking-widest">Base de Datos Protegida</span>
             </div>
-            <button className="text-[10px] font-black text-indigo-600 uppercase tracking-widest hover:underline">Ver Audit Log</button>
+            <button className="text-[10px] font-black text-medinery-blue uppercase tracking-widest hover:underline">Ver Audit Log</button>
           </div>
         </section>
       </div>

@@ -1,22 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   
-  /* Natural Tones Palette */
-  --color-natural-forest: #4A5D4E;
-  --color-natural-moss: #5D6F61;
-  --color-natural-sage: #A8B5A2;
-  --color-natural-cream: #FDFCF8;
-  --color-natural-border: #F0EFEA;
-  --color-natural-sand: #C5D1C7;
-  --color-natural-text: #2D3436;
+  /* Medical Dashboard Palette */
+  --color-medinery-blue: #0A58CA;
+  --color-medinery-dark: #004085;
+  --color-medinery-teal: #00D2B4;
+  --color-medinery-bg: #F8FAFD;
 }
 
 @layer base {
   body {
-    @apply bg-natural-cream text-natural-text antialiased;
+    @apply bg-slate-50 text-slate-900;
   }
 }
 

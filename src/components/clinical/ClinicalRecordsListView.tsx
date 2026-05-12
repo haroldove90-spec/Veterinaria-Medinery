@@ -34,7 +34,7 @@ export const ClinicalRecordsListView: React.FC<{ onSelect: () => void }> = ({ on
 
       <div className="flex gap-4">
         <div className="flex-1 relative group">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-indigo-500 transition-colors" size={20} />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-medinery-blue transition-colors" size={20} />
           <input 
             type="text"
             placeholder="Buscar por paciente o propietario..."
@@ -56,7 +56,7 @@ export const ClinicalRecordsListView: React.FC<{ onSelect: () => void }> = ({ on
             className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm flex items-center justify-between group cursor-pointer hover:bg-slate-50/50 transition-all"
           >
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shadow-inner">
+              <div className="w-12 h-12 rounded-2xl bg-medinery-blue/10 text-medinery-blue flex items-center justify-center shadow-inner">
                 <FileText size={22} />
               </div>
               <div>
@@ -79,7 +79,7 @@ export const ClinicalRecordsListView: React.FC<{ onSelect: () => void }> = ({ on
                 <span className="text-[10px] font-black text-slate-300 uppercase">Consultorio</span>
                 <span className="text-xs font-black text-slate-600">Nivel 2 - B4</span>
               </div>
-              <ChevronRight className="text-slate-200 group-hover:text-indigo-600 transition-colors" />
+              <ChevronRight className="text-slate-200 group-hover:text-medinery-blue transition-colors" />
             </div>
           </motion.div>
         ))}

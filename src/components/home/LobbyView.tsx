@@ -14,11 +14,12 @@ interface LobbyViewProps {
 
 export const LobbyView: React.FC<LobbyViewProps> = ({ onSelectRole }) => {
   return (
-    <div className="min-h-screen bg-[#FDFCF8] flex flex-col items-center justify-center p-6 sm:p-12 overflow-hidden relative">
+    <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-6 sm:p-12 overflow-hidden relative font-sans">
       {/* Background Accents */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-indigo-50 rounded-full blur-3xl opacity-60" />
-        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-emerald-50 rounded-full blur-3xl opacity-60" />
+        <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-medinery-blue/5 to-transparent" />
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-medinery-blue/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-medinery-teal/10 rounded-full blur-3xl" />
       </div>
 
       <motion.div 
@@ -26,15 +27,15 @@ export const LobbyView: React.FC<LobbyViewProps> = ({ onSelectRole }) => {
         animate={{ opacity: 1, y: 0 }}
         className="text-center z-10 mb-16"
       >
-        <div className="inline-flex items-center gap-3 px-4 py-2 bg-white border border-slate-200 rounded-full mb-6 shadow-sm">
-          <Dog className="text-indigo-600" size={18} />
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">Bienvenido al Centro Medinery</span>
+        <div className="inline-flex items-center gap-3 px-4 py-2 bg-white border border-slate-100 rounded-full mb-6 shadow-sm">
+          <Dog className="text-medinery-blue" size={18} />
+          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">Bienvenido al Centro Medinery</span>
         </div>
-        <h1 className="text-5xl md:text-6xl font-black text-slate-900 tracking-tighter">
-          Veterinaria <span className="text-indigo-600">Medinery</span>
+        <h1 className="text-5xl md:text-7xl font-extrabold text-medinery-dark tracking-tighter leading-none mb-6">
+          Veterinaria <span className="text-medinery-blue">Medinery</span>
         </h1>
-        <p className="text-slate-500 mt-4 text-lg font-medium max-w-lg mx-auto">
-          Seleccione su perfil de acceso para comenzar la demostración interactiva del sistema.
+        <p className="text-slate-500 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed">
+          The best platform for managing your veterinary clinic and providing the best care for patients.
         </p>
       </motion.div>
 
@@ -125,27 +126,27 @@ const RoleCard: React.FC<RoleCardProps> = ({ title, description, icon: Icon, col
   const themes = {
     indigo: {
       bg: 'bg-white',
-      border: 'hover:border-indigo-600',
-      iconBg: 'bg-indigo-50',
-      iconColor: 'text-indigo-600',
-      accent: 'bg-indigo-600',
-      shadow: 'hover:shadow-indigo-100',
+      border: 'hover:border-medinery-blue',
+      iconBg: 'bg-medinery-blue/10',
+      iconColor: 'text-medinery-blue',
+      accent: 'bg-medinery-blue',
+      shadow: 'hover:shadow-medinery-blue/10',
     },
     emerald: {
       bg: 'bg-white',
-      border: 'hover:border-emerald-600',
-      iconBg: 'bg-emerald-50',
-      iconColor: 'text-emerald-600',
-      accent: 'bg-emerald-600',
-      shadow: 'hover:shadow-emerald-100',
+      border: 'hover:border-medinery-teal',
+      iconBg: 'bg-medinery-teal/10',
+      iconColor: 'text-medinery-teal',
+      accent: 'bg-medinery-teal',
+      shadow: 'hover:shadow-medinery-teal/10',
     },
     sky: {
       bg: 'bg-white',
-      border: 'hover:border-sky-600',
-      iconBg: 'bg-sky-50',
-      iconColor: 'text-sky-600',
-      accent: 'bg-sky-600',
-      shadow: 'hover:shadow-sky-100',
+      border: 'hover:border-medinery-dark',
+      iconBg: 'bg-medinery-dark/10',
+      iconColor: 'text-medinery-dark',
+      accent: 'bg-medinery-dark',
+      shadow: 'hover:shadow-medinery-dark/10',
     },
   };
 

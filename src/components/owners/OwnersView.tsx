@@ -31,13 +31,13 @@ export const OwnersView: React.FC = () => {
           <h1 className="text-2xl font-black text-slate-900 tracking-tight">Directorio de Clientes</h1>
           <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">Gestión de Propietarios</p>
         </div>
-        <button className="flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-2xl text-sm font-bold shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition-all">
+        <button className="flex items-center gap-2 px-6 py-3 bg-medinery-teal text-white rounded-2xl text-sm font-bold shadow-lg shadow-medinery-teal/10 hover:bg-medinery-teal/90 transition-all">
           <Plus size={18} /> Nuevo Cliente
         </button>
       </div>
 
       <div className="relative group">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-indigo-500 transition-colors" size={20} />
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-medinery-teal transition-colors" size={20} />
         <input 
           type="text"
           placeholder="Buscar por nombre, correo o teléfono..."
@@ -63,7 +63,7 @@ export const OwnersView: React.FC = () => {
                 <tr key={owner.id} className="group hover:bg-slate-50/50 transition-all">
                   <td className="py-6 px-6">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-black">
+                      <div className="w-10 h-10 rounded-xl bg-medinery-blue/10 text-medinery-blue flex items-center justify-center font-black">
                         {owner.full_name[0]}
                       </div>
                       <span className="text-sm font-black text-slate-900">{owner.full_name}</span>
@@ -86,7 +86,7 @@ export const OwnersView: React.FC = () => {
                     </div>
                   </td>
                   <td className="py-6 px-6 text-right">
-                    <button className="p-2 text-slate-300 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-all">
+                    <button className="p-2 text-slate-300 hover:text-medinery-blue hover:bg-medinery-blue/5 rounded-lg transition-all">
                       <ExternalLink size={18} />
                     </button>
                   </td>
