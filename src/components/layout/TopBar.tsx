@@ -10,9 +10,11 @@ import { UserRole } from '../../types';
 interface TopBarProps {
   currentRole: UserRole;
   onSearch: (query: string) => void;
+  onOpenMenu?: () => void;
+  title?: string;
 }
 
-export const TopBar: React.FC<TopBarProps> = ({ currentRole, onSearch }) => {
+export const TopBar: React.FC<TopBarProps> = ({ currentRole, onSearch, onOpenMenu, title }) => {
   const [query, setQuery] = useState('');
 
   const handleSearch = (e: React.FormEvent) => {
@@ -21,16 +23,34 @@ export const TopBar: React.FC<TopBarProps> = ({ currentRole, onSearch }) => {
   };
 
   return (
-    <header className="h-16 bg-white border-b border-[#F0EFEA] flex items-center justify-between px-8 shrink-0 z-10 shadow-sm">
-      <div className="flex items-center gap-6 w-full max-w-2xl">
-        <form onSubmit={handleSearch} className="flex-1 relative group">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#A8B5A2] group-focus-within:text-[#4A5D4E] transition-colors" size={18} />
+    <header className="h-20 bg-white border-b border-slate-100 flex items-center justify-between px-4 md:px-8 shrink-0 z-50 shadow-sm relative">
+      <div className="flex items-center gap-4 lg:gap-6 w-full max-w-2xl">
+        {onOpenMenu && (
+          <button 
+            onClick={onOpenMenu}
+            className="lg:hidden p-2.5 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-xl transition-all"
+          >
+            <Menu size={24} />
+          </button>
+        )}
+        
+        {title && (
+          <div className="lg:hidden flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center">
+              <span className="text-white text-lg font-black italic">M</span>
+            </div>
+            <span className="font-black text-slate-900 tracking-tighter">{title}</span>
+          </div>
+        )}
+
+        <form onSubmit={handleSearch} className="hidden md:block flex-1 relative group ml-2">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-300 group-focus-within:text-indigo-500 transition-colors" size={18} />
           <input 
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Buscar propietario, mascota o teléfono... (Alt + S)"
-            className="w-full bg-[#F9F9F7] border border-[#F0EFEA] rounded-xl py-2 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-[#4A5D4E]/10 focus:border-[#4A5D4E] transition-all"
+            placeholder="Buscar paciente o cliente..."
+            className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-2.5 pl-10 pr-4 text-sm focus:outline-none focus:ring-4 focus:ring-indigo-500/5 focus:border-indigo-500 focus:bg-white transition-all font-medium"
           />
         </form>
       </div>

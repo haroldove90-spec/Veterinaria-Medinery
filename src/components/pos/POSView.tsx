@@ -13,7 +13,8 @@ import {
   CreditCard, 
   Banknote,
   Receipt,
-  Package
+  Package,
+  Stethoscope
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Product, ProductCategory } from '../../types';

@@ -58,7 +58,7 @@ export const ClinicalRecordForm: React.FC<ClinicalRecordFormProps> = ({
     handleSubmit,
     formState: { errors }
   } = useForm<ClinicalRecordFormData>({
-    resolver: zodResolver(clinicalRecordSchema),
+    resolver: zodResolver(clinicalRecordSchema) as any,
     defaultValues: {
       prescription: [],
       heart_rate: 0,
