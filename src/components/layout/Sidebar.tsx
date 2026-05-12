@@ -14,7 +14,8 @@ import {
   ChevronLeft, 
   ChevronRight,
   LogOut,
-  UserCircle
+  UserCircle,
+  ShoppingCart
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { UserRole } from '../../types';
@@ -24,6 +25,7 @@ interface SidebarItem {
   icon: React.ElementType;
   roles: UserRole[];
   path: string;
+  view?: string;
 }
 
 const menuItems: SidebarItem[] = [
@@ -31,46 +33,61 @@ const menuItems: SidebarItem[] = [
     title: 'Dashboard', 
     icon: LayoutDashboard, 
     roles: [UserRole.ADMIN, UserRole.VETERINARIAN, UserRole.RECEPTION],
-    path: '/' 
+    path: '/',
+    view: 'dashboard'
   },
   { 
-    title: 'Citas', 
+    title: 'Calendario', 
     icon: Calendar, 
     roles: [UserRole.ADMIN, UserRole.VETERINARIAN, UserRole.RECEPTION],
-    path: '/appointments' 
+    path: '/appointments',
+    view: 'calendar'
+  },
+  { 
+    title: 'Caja / POS', 
+    icon: ShoppingCart, 
+    roles: [UserRole.ADMIN, UserRole.RECEPTION],
+    path: '/pos',
+    view: 'pos'
   },
   { 
     title: 'Mascotas', 
     icon: Dog, 
     roles: [UserRole.ADMIN, UserRole.VETERINARIAN, UserRole.RECEPTION],
-    path: '/pets' 
+    path: '/pets',
+    view: 'pets'
   },
   { 
     title: 'Propietarios', 
     icon: Users, 
     roles: [UserRole.ADMIN, UserRole.RECEPTION],
-    path: '/owners' 
+    path: '/owners',
+    view: 'owners'
   },
   { 
     title: 'Expedientes', 
     icon: ClipboardList, 
     roles: [UserRole.ADMIN, UserRole.VETERINARIAN],
-    path: '/clinical-records' 
+    path: '/clinical-records',
+    view: 'clinical-records'
   },
   { 
-    title: 'Configuración', 
+    title: 'Configuracion', 
     icon: Settings, 
     roles: [UserRole.ADMIN],
-    path: '/settings' 
+    path: '/settings',
+    view: 'settings'
   },
 ];
 
 interface SidebarProps {
   userRole: UserRole;
   userName: string;
+  onNavigate: (view: string) => void;
+  activeView: string;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ userRole, userName }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ userRole, userName, onNavigate, activeView }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const filteredItems = menuItems.filter(item => item.roles.includes(userRole));
@@ -110,9 +127,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ userRole, userName }) => {
         {filteredItems.map((item) => (
           <button
             key={item.title}
-            className="w-full flex items-center gap-4 px-3 py-3 rounded-lg text-[#C5D1C7] hover:bg-[#5D6F61] hover:text-white transition-all group relative font-medium text-left"
+            onClick={() => item.view && onNavigate(item.view)}
+            className={`w-full flex items-center gap-4 px-3 py-3 rounded-lg transition-all group relative font-medium text-left ${
+              activeView === item.view 
+                ? 'bg-[#5D6F61] text-white' 
+                : 'text-[#C5D1C7] hover:bg-[#5D6F61]/50 hover:text-white'
+            }`}
           >
-            <item.icon size={20} className="opacity-80 group-hover:opacity-100 transition-opacity" />
+            <item.icon size={20} className={`${activeView === item.view ? 'opacity-100' : 'opacity-80 group-hover:opacity-100'} transition-opacity`} />
             {!isCollapsed && (
               <motion.span 
                 initial={{ opacity: 0, x: -10 }}
