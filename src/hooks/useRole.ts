@@ -9,6 +9,7 @@ export const useRole = (currentRole: UserRole) => {
   const isAdmin = currentRole === UserRole.ADMIN;
   const isVet = currentRole === UserRole.VETERINARIAN;
   const isReception = currentRole === UserRole.RECEPTION;
+  const isClient = currentRole === UserRole.CLIENT;
 
   const canAccessManagement = isAdmin;
   const canAccessClinical = isAdmin || isVet;
@@ -19,6 +20,7 @@ export const useRole = (currentRole: UserRole) => {
     isAdmin,
     isVet,
     isReception,
+    isClient,
     canAccessManagement,
     canAccessClinical,
     canAccessReception,

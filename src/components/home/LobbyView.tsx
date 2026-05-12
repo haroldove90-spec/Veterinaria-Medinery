@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { Shield, Stethoscope, Calendar, ArrowRight, Dog } from 'lucide-react';
+import { Shield, Stethoscope, Calendar, ArrowRight, Dog, User } from 'lucide-react';
 import { motion } from 'motion/react';
 import { UserRole } from '../../types';
 
@@ -39,7 +39,7 @@ export const LobbyView: React.FC<LobbyViewProps> = ({ onSelectRole }) => {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 w-full max-w-6xl z-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl z-10">
         {/* Admin Card */}
         <RoleCard 
           title="ADMINISTRACIÓN"
@@ -68,6 +68,16 @@ export const LobbyView: React.FC<LobbyViewProps> = ({ onSelectRole }) => {
           color="sky"
           onClick={() => onSelectRole(UserRole.RECEPTION)}
           delay={0.3}
+        />
+
+        {/* Client Card */}
+        <RoleCard 
+          title="ÁREA DE CLIENTES"
+          description="Consulte el estado de sus mascotas, reciba recordatorios y agende nuevas visitas online."
+          icon={User}
+          color="rose"
+          onClick={() => onSelectRole(UserRole.CLIENT)}
+          delay={0.4}
         />
       </div>
 
@@ -117,7 +127,7 @@ interface RoleCardProps {
   title: string;
   description: string;
   icon: React.ElementType;
-  color: 'indigo' | 'emerald' | 'sky';
+  color: 'indigo' | 'emerald' | 'sky' | 'rose';
   onClick: () => void;
   delay: number;
 }
@@ -147,6 +157,14 @@ const RoleCard: React.FC<RoleCardProps> = ({ title, description, icon: Icon, col
       iconColor: 'text-medinery-dark',
       accent: 'bg-medinery-dark',
       shadow: 'hover:shadow-medinery-dark/10',
+    },
+    rose: {
+      bg: 'bg-white',
+      border: 'hover:border-rose-500',
+      iconBg: 'bg-rose-50',
+      iconColor: 'text-rose-500',
+      accent: 'bg-rose-600',
+      shadow: 'hover:shadow-rose-100',
     },
   };
 

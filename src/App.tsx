@@ -16,6 +16,7 @@ import { POSView } from './components/pos/POSView';
 import { DashboardView } from './components/dashboard/DashboardView';
 import { ReportsView } from './components/reports/ReportsView';
 import { LobbyView } from './components/home/LobbyView';
+import { LandingPageView } from './components/client/LandingPageView';
 import { PetsView } from './components/pets/PetsView';
 import { OwnersView } from './components/owners/OwnersView';
 import { ClinicalRecordsListView } from './components/clinical/ClinicalRecordsListView';
@@ -63,7 +64,7 @@ const mockAppointments: Appointment[] = [
   },
 ];
 
-type AppView = 'lobby' | 'dashboard' | 'calendar' | 'clinical-record' | 'pets' | 'owners' | 'pos' | 'reports' | 'settings';
+type AppView = 'lobby' | 'landing' | 'dashboard' | 'calendar' | 'clinical-record' | 'clinical-records' | 'pets' | 'owners' | 'pos' | 'reports' | 'settings';
 
 export default function App() {
   const [currentRole, setCurrentRole] = useState<UserRole>(UserRole.ADMIN);
@@ -85,8 +86,12 @@ export default function App() {
   if (view === 'lobby') {
     return <LobbyView onSelectRole={(role) => {
       setCurrentRole(role);
-      setView('dashboard');
+      setView(role === UserRole.CLIENT ? 'landing' : 'dashboard');
     }} />;
+  }
+
+  if (view === 'landing') {
+    return <LandingPageView onLogout={() => setView('lobby')} />;
   }
 
   return (
