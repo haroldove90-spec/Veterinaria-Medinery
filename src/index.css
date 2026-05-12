@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  
+  /* Natural Tones Palette */
+  --color-natural-forest: #4A5D4E;
+  --color-natural-moss: #5D6F61;
+  --color-natural-sage: #A8B5A2;
+  --color-natural-cream: #FDFCF8;
+  --color-natural-border: #F0EFEA;
+  --color-natural-sand: #C5D1C7;
+  --color-natural-text: #2D3436;
+}
+
+@layer base {
+  body {
+    @apply bg-natural-cream text-natural-text antialiased;
+  }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+

@@ -1,0 +1,6 @@
+{
+  "name": "VetCare Pro - PWA Veterinaria",
+  "description": "Plataforma integral para gestión veterinaria con roles de Admin, Veterinario y Recepción. Incluye expedientes clínicos, citas y gestión de mascotas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
